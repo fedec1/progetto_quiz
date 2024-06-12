@@ -29,6 +29,9 @@ public class Nazione {
 	@Column(name = "flag", length = 255)
     private String bandiera;
 	
+	@Column(name = "alpha2Code", nullable = false, length = 2)
+    private String alpha2Code;
+	
 	@Column(name = "borders")
     private String borders;
 
@@ -67,6 +70,14 @@ public class Nazione {
 	public String getBorders() {
 		return borders;
 	}
+	
+	public String getAlpha2Code() {
+        return alpha2Code;
+    }
+
+    public void setAlpha2Code(String alpha2Code) {
+        this.alpha2Code = alpha2Code;
+    }
 
 	
 	public List<String> getBordersAsList() {
