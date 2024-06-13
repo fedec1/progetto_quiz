@@ -41,3 +41,13 @@ Il DB è stato poi aggiornato inserendo una Primary Key ID e in java è stata co
 ##### Classe FlagImporter
 
 La classe è stata ideata per aggiornare i valori della colonna 'flag' con percorsi locali aggiornati alle immagini .svg
+
+##### Classe Convertitore
+
+Classe di utility ideata per convertire il campo 'border' da formato text a lista.
+
+#### Entities
+
+##### Classe Nazione
+
+La classe **Nazione** rappresenta un'entità che mappa la corrispondente tabella nel DB. Implementa i getters per alphacodes, nomi delle nazioni, capitali, bandiere e confini.
