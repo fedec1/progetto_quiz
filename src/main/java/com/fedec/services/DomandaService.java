@@ -26,7 +26,7 @@ public class DomandaService {
         Random random = new Random();
         Nazione nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
 
-        String domanda = "Qual è la capitale di " + nazioneScelta.getName() + "?";
+        String domanda = "Qual è la capitale di questo stato?\n " + nazioneScelta.getName();
         String rispostaCorretta = nazioneScelta.getCapital();
 
         List<String> opzioni = new ArrayList<>();
