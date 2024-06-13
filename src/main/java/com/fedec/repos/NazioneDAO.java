@@ -8,5 +8,6 @@ public interface NazioneDAO extends JpaRepository<Nazione, Integer> {
 	
 	//derived query
 	Nazione getNazioneByAlpha2Code(String alpha2Code);
+	Nazione getNazioneByAlpha3Code(String alpha3Code);
 	
 }

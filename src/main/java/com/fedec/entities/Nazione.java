@@ -32,6 +32,9 @@ public class Nazione {
 	@Column(name = "alpha2Code", nullable = false, length = 2)
     private String alpha2Code;
 	
+	@Column(name = "alpha3Code", nullable = false, length = 2)
+    private String alpha3Code;
+	
 	@Column(name = "borders")
     private String borders;
 
@@ -78,8 +81,16 @@ public class Nazione {
     public void setAlpha2Code(String alpha2Code) {
         this.alpha2Code = alpha2Code;
     }
+    
+  
+	public String getAlpha3Code() {
+		return alpha3Code;
+	}
 
-	
+	public void setAlpha3Code(String alpha3Code) {
+		this.alpha3Code = alpha3Code;
+	}
+
 	public List<String> getBordersAsList() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {

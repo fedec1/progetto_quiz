@@ -36,4 +36,10 @@ public class NazioneServiceImp implements NazioneService {
         return dao.save(nazione);
     }
 
+	@Override
+	public Nazione getNazioneByAlpha3Code(String alpha3Code) {
+		// TODO Auto-generated method stub
+		return dao.getNazioneByAlpha3Code(alpha3Code);
+	}
+
 }
