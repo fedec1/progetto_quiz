@@ -1,13 +1,26 @@
 package com.fedec;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.fedec.services.NazioneService;
+
+import jakarta.transaction.Transactional;
 
 @SpringBootTest
 class Prj21QuizCountriesApplicationTests {
 
+	@Autowired
+	private NazioneService service;
+	
 	@Test
+	@Transactional
 	void contextLoads() {
+		
+		System.out.println(service.getNazioneById(4).getCapital());
+		
 	}
+	
 
 }

@@ -9,5 +9,6 @@ public interface NazioneService {
 	List<Nazione> getNazioni();
 	Nazione getNazioneById(int id);
 	Nazione getNazioneByAlpha2Code(String alpha2Code);
+	public Nazione saveNazione(Nazione nazione);
 
 }
