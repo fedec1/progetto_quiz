@@ -51,3 +51,21 @@ Classe di utility ideata per convertire il campo 'border' da formato text a list
 ##### Classe Nazione
 
 La classe **Nazione** rappresenta un'entità che mappa la corrispondente tabella nel DB. Implementa i getters per alphacodes, nomi delle nazioni, capitali, bandiere e confini.
+
+#### Repos
+
+##### NazioneDAO
+
+La classe NazioneDAO è un'interfaccia che rappresenta il DAO per l'entità Nazione. Oltre ai metodi CRUD sono stati implementati anche **getNazioneByAlpha2Code** e **getNazioneByAlpha3Code**, metodi di query derivati che consentono di recuperare le nazioni dal database utilizzando i codici alfa a due e tre lettere.
+
+#### Services
+
+##### NazioneService
+
+La classe **NazioneService** è un'interfaccia che definisce i metodi di servizio per l'entità **Nazione**. Vengono implementati i seguenti metodi:
+
+- **List<Nazione> getNazioni()** : restituisce una lista di oggetti **Nazione**
+- **Nazione getNazioneById(int id)** : ritorna un oggetto nazione dato un id come parametro
+- **Nazione getNazioneByAlpha2Code(String alpha2Code)** : ritorna un oggetto nazione dato un codice alfa2 come parametro
+- **Nazione getNazioneByAlpha3Code(String alpha3Code)** : ritorna un oggetto nazione dato un codice alfa3 come parametro
+- **public Nazione saveNazione(Nazione nazione)** : salva una nazione nel database
