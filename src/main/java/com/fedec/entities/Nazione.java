@@ -1,11 +1,11 @@
 package com.fedec.entities;
 
-import java.io.IOException;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 
+import accessori.Convertitore;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,8 +35,9 @@ public class Nazione {
 	@Column(name = "alpha3Code", nullable = false, length = 2)
     private String alpha3Code;
 	
-	@Column(name = "borders")
-    private String borders;
+	@Column(name = "borders", columnDefinition = "TEXT")
+    @Convert(converter = Convertitore.class) //richiama la classe Convertitore
+    private List<String> borders;
 
 	public int getId() {
 		return id;
@@ -70,7 +71,7 @@ public class Nazione {
 		this.bandiera = bandiera;
 	}
 
-	public String getBorders() {
+	public List<String> getBorders() {
 		return borders;
 	}
 	
@@ -91,15 +92,6 @@ public class Nazione {
 		this.alpha3Code = alpha3Code;
 	}
 
-	public List<String> getBordersAsList() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            return objectMapper.readValue(this.borders, List.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 	
 	
 }
