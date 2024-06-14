@@ -25,15 +25,32 @@ public class QuizController {
         return domandaService.generaDomandaConfini();
     }
 
+     @GetMapping("bandiere")
+    public Domanda getDomandaBandiere() {
+        return domandaService.generaDomandaBandiere();
+    }
+     
+     @GetMapping("quizcapitale")
+     public List<Domanda> getDomandeCapitali() {
+         return domandaService.generaQuizCapitali(15);
+     }
+     
+     @GetMapping("quizbandiere")
+     public List<Domanda> getDomandeBandiere() {
+         return domandaService.generaQuizBandiere(15);
+     }
+     
+     @GetMapping("quizconfini")
+     public List<Domanda> getDomandeConfini() {
+         return domandaService.generaQuizConfini(15);
+     }
+    
     @GetMapping("miste")
     public List<Domanda> getDomandeMiste() {
         return domandaService.generaDomandeMiste(15);
     }
     
-    @GetMapping("bandiere")
-    public List<Domanda> getDomandaBandiere() {
-        return domandaService.generaDomandeMiste(15);
-    }
+    
 }
 
 

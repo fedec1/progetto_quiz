@@ -3,7 +3,7 @@ let domandaCorrente = 0;
 let punteggio = 0;
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    fetch('/quiz/miste')
+    fetch('/api/miste')
         .then(response => response.json())
         .then(data => {
             domande = data;
