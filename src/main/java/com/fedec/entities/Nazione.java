@@ -2,8 +2,8 @@ package com.fedec.entities;
 
 import java.util.List;
 
+import com.fedec.accessories.Convertitore;
 
-import accessori.Convertitore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;

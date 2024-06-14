@@ -1,4 +1,4 @@
-package accessori;
+package com.fedec.accessories;
 
 import java.io.File;
 import java.util.HashMap;
@@ -8,12 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.fedec.entities.Nazione;
 import com.fedec.services.NazioneService;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.fedec.accessories", "com.fedec.services", "com.fedec.repos"})
+@EnableJpaRepositories(basePackages = "com.fedec.repos")
+@EntityScan(basePackages = "com.fedec.entities")
 public class FlagImporter {
 
     public static void main(String[] args) {
@@ -21,7 +27,7 @@ public class FlagImporter {
     }
 
     @Autowired
-    private NazioneService dao;
+    private NazioneService nazioneService;
 
     @Bean
     public CommandLineRunner importBandiere() {
@@ -36,7 +42,7 @@ public class FlagImporter {
                     if (file.isFile()) {
                         String fileName = file.getName(); //restituisce il nome del file(ad esempio it.svg)
                         String alphaCode = fileName.substring(0, 2).toUpperCase(); //prende i primi due caratteri del file e li converte in maiusc
-                        alphaCodeToFilePathMap.put(alphaCode, file.getAbsolutePath()); //mappa l'alphacode al percorso assoluto del file
+                        alphaCodeToFilePathMap.put(alphaCode, folderPath + "\\" +  alphaCode + ".svg"); //mappa l'alphacode al percorso assoluto del file
                     }
                 }
 
@@ -44,10 +50,10 @@ public class FlagImporter {
                     String alphaCode = entry.getKey(); //estrae la key (alphacode2)
                     String filePath = entry.getValue(); //estrae il value (percorso file)
 
-                    Nazione nazione = dao.getNazioneByAlpha2Code(alphaCode); //istanza oggetto nazione cercata per alphacode corrispondende
+                    Nazione nazione = nazioneService.getNazioneByAlpha2Code(alphaCode); //istanza oggetto nazione cercata per alphacode corrispondende
                     if (nazione != null) { //se c'è
                         nazione.setBandiera(filePath); //setta la bandiera con il percorso file
-                        dao.saveNazione(nazione); //aggiorna il record corrispondente
+                        nazioneService.saveNazione(nazione); //aggiorna il record corrispondente
                     }
                 }
                 System.out.println("Aggiornamento del database completato con successo.");

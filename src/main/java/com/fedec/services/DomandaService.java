@@ -41,6 +41,8 @@ public class DomandaService {
 
         return new Domanda(domanda, rispostaCorretta, opzioni);
     }
+    
+    
 
     @Transactional(readOnly = true)
     public Domanda generaDomandaConfini() {

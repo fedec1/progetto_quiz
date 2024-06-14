@@ -1,4 +1,4 @@
-package accessori;
+package com.fedec.accessories;
 
 
 /*classe per convertire una stringa json*/
