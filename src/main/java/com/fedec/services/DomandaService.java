@@ -42,7 +42,28 @@ public class DomandaService {
         return new Domanda(domanda, rispostaCorretta, opzioni);
     }
     
-    
+    @Transactional(readOnly = true)
+    public Domanda generaDomandaBandiere() {
+    	List<Nazione> nazioni = dao.findAll();
+    	Random random = new Random();
+    	Nazione nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
+    	String domanda = "A quale stato corrisponde questa bandiera?\n ";
+    	String rispostaCorretta = nazioneScelta.getName();
+    	String path = nazioneScelta.getBandiera();
+    	
+    	List<String> opzioni = new ArrayList<>();
+        opzioni.add(rispostaCorretta);
+        while (opzioni.size() < 4) {
+            Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
+            if (!opzioni.contains(nazioneRandom.getCapital())) {
+                opzioni.add(nazioneRandom.getCapital());
+            }
+        }
+        Collections.shuffle(opzioni);
+
+        return new Domanda(domanda, rispostaCorretta, opzioni, path);
+    	
+    }
 
     @Transactional(readOnly = true)
     public Domanda generaDomandaConfini() {

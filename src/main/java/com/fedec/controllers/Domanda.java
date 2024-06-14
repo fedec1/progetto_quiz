@@ -7,12 +7,20 @@ public class Domanda {
 	    private String domanda;
 	    private String rispostaCorretta;
 	    private List<String> opzioni;
+	    private String path;
 
 	
 	    public Domanda(String domanda, String rispostaCorretta, List<String> opzioni) {
 	        this.domanda = domanda;
 	        this.rispostaCorretta = rispostaCorretta;
 	        this.opzioni = opzioni;
+	    }
+	    
+	    public Domanda(String domanda, String rispostaCorretta, List<String> opzioni, String path) {
+	        this.domanda = domanda;
+	        this.rispostaCorretta = rispostaCorretta;
+	        this.opzioni = opzioni;
+	        this.path = path;
 	    }
 
 
@@ -39,5 +47,15 @@ public class Domanda {
 	    public void setOpzioni(List<String> opzioni) {
 	        this.opzioni = opzioni;
 	    }
+
+		public String getPath() {
+			return path;
+		}
+
+		public void setPath(String path) {
+			this.path = path;
+		}
+	    
+	    
 	}
 
