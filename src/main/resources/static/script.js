@@ -3,16 +3,25 @@ let domandaCorrente = 0;
 let punteggio = 0;
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    fetch('/api/miste')
+    document.getElementById('miste').addEventListener('click', () => loadQuiz('miste'));
+    document.getElementById('quizCapitale').addEventListener('click', () => loadQuiz('quizcapitale'));
+    document.getElementById('quizBandiere').addEventListener('click', () => loadQuiz('quizbandiere'));
+    document.getElementById('quizConfini').addEventListener('click', () => loadQuiz('quizconfini'));
+});
+
+function loadQuiz(type) {
+    fetch(`/api/${type}`)
         .then(response => response.json())
         .then(data => {
             domande = data;
+            domandaCorrente = 0;
+            punteggio = 0;
             visualizzaDomanda();
         })
         .catch(error => {
             console.error('Error fetching questions:', error);
         });
-});
+}
 
 function visualizzaDomanda() {
     if (domandaCorrente >= domande.length) {
@@ -23,9 +32,19 @@ function visualizzaDomanda() {
     const domanda = domande[domandaCorrente];
     const questionElement = document.getElementById('question');
     const optionsContainer = document.getElementById('options-container');
+    const imageContainer = document.getElementById('image-container');
 
     questionElement.innerText = domanda.domanda;
     optionsContainer.innerHTML = '';
+    imageContainer.innerHTML = ''; // Clear the image container
+
+    if (domanda.path) {
+        const img = document.createElement('img');
+        img.src = domanda.path;
+        img.alt = "Bandiera";
+        img.style.width = "200px";
+        imageContainer.appendChild(img);
+    }
 
     domanda.opzioni.forEach(option => {
         const button = document.createElement('button');
@@ -48,8 +67,6 @@ function verificaRisposta(selectedOption, correctAnswer) {
 
 function mostraRisultato() {
     const questionContainer = document.getElementById('question-container');
-    const nextButton = document.getElementById('next-button');
-
     questionContainer.innerHTML = `<p>Hai completato il quiz! Il tuo punteggio è ${punteggio} su ${domande.length}.</p>`;
-    nextButton.style.display = 'none';
 }
+
