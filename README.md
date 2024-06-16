@@ -134,7 +134,16 @@ for (String border : borderArray) {
         }
 ```
 
-Il ciclo for in seguito rimuove tutti gli eventuali spazi bianchi rimasti e le occorrenze dei doppi apici, in modo da ritornare un alpha3code pulito.  
+Il ciclo for in seguito rimuove tutti gli eventuali spazi bianchi rimasti e le occorrenze dei doppi apici, in modo da ritornare un alpha3code pulito. 
+
+##### Classe Domanda
+
+La classe è stata ideata per modellare una domanda. Sono presenti due costruttori, uno per costruire un oggetto Domanda generico e uno per le domande riguardanti le bandiere. Qui i parametri:  
+
+- **String domanda** : stringa contenente la domanda
+- **String rispostaCorretta** : stringa per la risposta corretta
+- **List<String> opzioni** : Lista di stringhe contenenti le possibili opzioni
+- **String path** : stringa contenente un percorso file (usato dal secondo costruttore)
 
 
 
@@ -155,3 +164,9 @@ La classe **NazioneService** è un'interfaccia che definisce i metodi di servizi
 - **Nazione getNazioneByAlpha2Code(String alpha2Code)** : ritorna un oggetto nazione dato un codice alfa2 come parametro
 - **Nazione getNazioneByAlpha3Code(String alpha3Code)** : ritorna un oggetto nazione dato un codice alfa3 come parametro
 - **public Nazione saveNazione(Nazione nazione)** : salva una nazione nel database
+
+##### NazioneServiceImp
+
+La classe **NazioneServiceImp** fornisce semplicemente l'implementazione dei metodi precedenti.
+
+

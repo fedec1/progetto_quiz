@@ -1,5 +1,6 @@
 package com.fedec.controllers;
 
+import com.fedec.entities.Domanda;
 import com.fedec.services.DomandaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
