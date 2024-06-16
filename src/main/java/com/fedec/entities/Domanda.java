@@ -1,4 +1,4 @@
-package com.fedec.controllers;
+package com.fedec.entities;
 
 import java.util.List;
 

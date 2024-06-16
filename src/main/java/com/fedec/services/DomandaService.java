@@ -2,14 +2,16 @@ package com.fedec.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fedec.controllers.Domanda;
+import com.fedec.entities.Domanda;
 import com.fedec.entities.Nazione;
 import com.fedec.repos.NazioneDAO;
 
@@ -26,13 +28,16 @@ public class DomandaService {
         Random random = new Random();
         Nazione nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
 
+        String regione = nazioneScelta.getRegion(); // get la regione della nazione scelta
+        List<Nazione> nazioniStessaRegione = dao.findByRegion(regione); // get nazioni della stessa regione
+
         String domanda = "Qual è la capitale di questo stato?\n " + nazioneScelta.getName();
         String rispostaCorretta = nazioneScelta.getCapital();
 
         List<String> opzioni = new ArrayList<>();
         opzioni.add(rispostaCorretta);
         while (opzioni.size() < 4) {
-            Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
+            Nazione nazioneRandom = nazioniStessaRegione.get(random.nextInt(nazioniStessaRegione.size()));
             if (!opzioni.contains(nazioneRandom.getCapital())) {
                 opzioni.add(nazioneRandom.getCapital());
             }
@@ -55,8 +60,8 @@ public class DomandaService {
         opzioni.add(rispostaCorretta);
         while (opzioni.size() < 4) {
             Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
-            if (!opzioni.contains(nazioneRandom.getCapital())) {
-                opzioni.add(nazioneRandom.getCapital());
+            if (!opzioni.contains(nazioneRandom.getName())) {
+                opzioni.add(nazioneRandom.getName());
             }
         }
         Collections.shuffle(opzioni);
@@ -68,14 +73,11 @@ public class DomandaService {
     @Transactional(readOnly = true)
     public Domanda generaDomandaConfini() {
         List<Nazione> nazioni = dao.findAll();
-        if (nazioni.isEmpty()) {
-            throw new IllegalStateException("Non ci sono nazioni nel database.");
-        }
-
+        
         Random random = new Random();
         Nazione nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
 
-        List<String> confini = nazioneScelta.getBorders();
+        List<String> confini = nazioneScelta.getBordersAsList(nazioneScelta.getBorders());
         if (confini == null || confini.isEmpty()) {
             throw new IllegalStateException("La nazione scelta non ha nazioni confinanti.");
         }
@@ -87,7 +89,7 @@ public class DomandaService {
         opzioni.add(rispostaCorretta);
         while (opzioni.size() < 4) {
             Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
-            if (!opzioni.contains(nazioneRandom.getName())) {
+            if (!opzioni.contains(nazioneRandom.getName()) && !confini.contains(nazioneRandom.getAlpha3Code())) {
                 opzioni.add(nazioneRandom.getName());
             }
         }

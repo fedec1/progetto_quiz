@@ -1,11 +1,9 @@
 package com.fedec.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.fedec.accessories.Convertitore;
-
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,12 +30,14 @@ public class Nazione {
 	@Column(name = "alpha2Code", nullable = false, length = 2)
     private String alpha2Code;
 	
-	@Column(name = "alpha3Code", nullable = false, length = 2)
+	@Column(name = "alpha3Code", nullable = false, length = 3)
     private String alpha3Code;
 	
 	@Column(name = "borders", columnDefinition = "TEXT")
-    @Convert(converter = Convertitore.class) //richiama la classe Convertitore
-    private List<String> borders;
+    private String borders;
+	
+	@Column(name = "region", nullable = false, length = 89)
+	private String region;
 
 	public int getId() {
 		return id;
@@ -71,7 +71,7 @@ public class Nazione {
 		this.bandiera = bandiera;
 	}
 
-	public List<String> getBorders() {
+	public String getBorders() {
 		return borders;
 	}
 	
@@ -91,6 +91,29 @@ public class Nazione {
 	public void setAlpha3Code(String alpha3Code) {
 		this.alpha3Code = alpha3Code;
 	}
+	
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public List<String> getBordersAsList(String bordersString) {
+        List<String> borders = new ArrayList<>();
+
+        // Rimuovi le parentesi quadre iniziali e finali
+        bordersString = bordersString.substring(1, bordersString.length() - 1);
+
+        // Split sulla virgola e rimuovi gli spazi
+        String[] borderArray = bordersString.split(",");
+        for (String border : borderArray) {
+            borders.add(border.trim().replaceAll("\"", "")); // Rimuovi anche i doppi apici
+        }
+
+        return borders;
+    }
 
 	
 	

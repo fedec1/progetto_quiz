@@ -11,5 +11,6 @@ public interface NazioneService {
 	Nazione getNazioneByAlpha2Code(String alpha2Code);
 	Nazione getNazioneByAlpha3Code(String alpha3Code);
 	public Nazione saveNazione(Nazione nazione);
+	List<Nazione> findByRegion(String region);
 
 }

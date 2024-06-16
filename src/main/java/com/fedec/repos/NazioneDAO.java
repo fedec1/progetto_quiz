@@ -1,5 +1,7 @@
 package com.fedec.repos;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +13,6 @@ public interface NazioneDAO extends JpaRepository<Nazione, Integer> {
 	//derived query
 	Nazione getNazioneByAlpha2Code(String alpha2Code);
 	Nazione getNazioneByAlpha3Code(String alpha3Code);
+	List<Nazione> findByRegion(String region);
 	
 }
