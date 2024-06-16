@@ -103,7 +103,7 @@ public class DomandaService {
         List<Domanda> domande = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < numeroDiDomande; i++) {
-            int tipoDomanda = random.nextInt(3); // Genera un numero casuale tra 0 e 2
+            int tipoDomanda = random.nextInt(3); // genera un numero casuale tra 0 e 2
             try {
                 switch (tipoDomanda) {
                     case 0:
@@ -117,7 +117,7 @@ public class DomandaService {
                         break;
                 }
             } catch (IllegalStateException e) {
-                i--; // Ripeti il ciclo se non è stato possibile generare una domanda (ad es. per mancanza di confini)
+                i--; // ripete il ciclo se non è stato possibile generare una domanda (ad es. per mancanza di confini)
             }
         }
         return domande;
