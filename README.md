@@ -241,5 +241,10 @@ Il metodo **generaDomandaBandiere()** si comporta nel medesimo modo. Differisce 
 
 Il metodo **generaDomandaConfini()** funziona in maniera simile. La differenza sta nell'ulteriore controllo aggiunto nel ciclo while, in modo tale che non venga aggiunta un'altra nazione confinante oltre alla risposta corretta nelle opzioni.
 
+Il metodo **getDomandeMiste()** prende come parametro un intero n (indicante il numero di domande che si vuole generare) e restituisce una lista di domande generate casualmente iterando n volte e chiamando i metodi precedenti nello switch.
+
+I metodi **generaQuizCapitali**, **generaQuizConfini** e **generaQuizBandiere** restituiscono invece una lista di domande spefifica.
+
+
 
 

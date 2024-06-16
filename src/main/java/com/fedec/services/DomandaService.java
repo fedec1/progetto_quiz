@@ -60,8 +60,8 @@ public class DomandaService {
         opzioni.add(rispostaCorretta);
         while (opzioni.size() < 4) {
             Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
-            if (!opzioni.contains(nazioneRandom.getCapital())) {
-                opzioni.add(nazioneRandom.getCapital());
+            if (!opzioni.contains(nazioneRandom.getName())) {
+                opzioni.add(nazioneRandom.getName());
             }
         }
         Collections.shuffle(opzioni);
@@ -73,10 +73,7 @@ public class DomandaService {
     @Transactional(readOnly = true)
     public Domanda generaDomandaConfini() {
         List<Nazione> nazioni = dao.findAll();
-        if (nazioni.isEmpty()) {
-            throw new IllegalStateException("Non ci sono nazioni nel database.");
-        }
-
+        
         Random random = new Random();
         Nazione nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
 
@@ -92,7 +89,6 @@ public class DomandaService {
         opzioni.add(rispostaCorretta);
         while (opzioni.size() < 4) {
             Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
-            // Assicurati che la nazione random non sia già nelle opzioni e non sia un confine
             if (!opzioni.contains(nazioneRandom.getName()) && !confini.contains(nazioneRandom.getAlpha3Code())) {
                 opzioni.add(nazioneRandom.getName());
             }
