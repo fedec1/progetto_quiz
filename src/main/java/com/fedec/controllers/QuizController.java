@@ -16,21 +16,6 @@ public class QuizController {
     @Autowired
     private DomandaService domandaService;
 
-    @GetMapping("capitale")
-    public Domanda getDomandaCapitale() {
-        return domandaService.generaDomandaCapitale();
-    }
-
-    @GetMapping("confini")
-    public Domanda getDomandaConfini() {
-        return domandaService.generaDomandaConfini();
-    }
-
-     @GetMapping("bandiere")
-    public Domanda getDomandaBandiere() {
-        return domandaService.generaDomandaBandiere();
-    }
-     
      @GetMapping("quizcapitale")
      public List<Domanda> getDomandeCapitali() {
          return domandaService.generaQuizCapitali(15);

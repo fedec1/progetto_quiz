@@ -245,6 +245,12 @@ Il metodo **getDomandeMiste()** prende come parametro un intero n (indicante il 
 
 I metodi **generaQuizCapitali**, **generaQuizConfini** e **generaQuizBandiere** restituiscono invece una lista di domande spefifica.
 
+#### Controllers
+
+##### QuizController
+
+La classe **QuizController** è un controller REST che gestisce le richieste HTTP per restituire le liste di domande. Utilizza il servizio DomandaService per generare le domande e le restituisce come risposte alle richieste HTTP. Ogni metodo gestisce un endpoint specifico e restituisce un elenco di domande.
+
 
 
 
