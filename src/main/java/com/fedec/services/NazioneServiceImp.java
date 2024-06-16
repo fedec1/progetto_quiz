@@ -42,4 +42,10 @@ public class NazioneServiceImp implements NazioneService {
 		return dao.getNazioneByAlpha3Code(alpha3Code);
 	}
 
+	@Override
+	public List<Nazione> findByRegion(String region) {
+		// TODO Auto-generated method stub
+		return dao.findByRegion(region);
+	}
+
 }

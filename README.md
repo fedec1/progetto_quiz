@@ -36,7 +36,7 @@ Il DB è stato poi aggiornato inserendo una Primary Key ID e in java è stata co
 
 ### Java Back-end
 
-#### Pacchetto 'accessori'
+#### Accessories
 
 ##### Classe FlagImporter
 
@@ -103,7 +103,7 @@ Per maggiori dettagli si veda la sezione *Repos*.
 
 ##### Classe Nazione
 
-La classe **Nazione** rappresenta un'entità che mappa la corrispondente tabella nel DB. Implementa i getters per alphacodes, nomi delle nazioni, capitali, bandiere e confini.  
+La classe **Nazione** rappresenta un'entità che mappa la corrispondente tabella nel DB. Implementa i getters per alphacodes, nomi delle nazioni, capitali, bandiere, regione e confini.  
 E' stato anche implementato il metodo **getBordersAsList()** che prende come parametro la stringa restituita da **getBorders()** e restituisce una lista di stringhe (in questo caso una lista di alpha3code). Nel dettaglio:  
 
 ```java
@@ -138,7 +138,7 @@ Il ciclo for in seguito rimuove tutti gli eventuali spazi bianchi rimasti e le o
 
 ##### Classe Domanda
 
-La classe è stata ideata per modellare una domanda. Sono presenti due costruttori, uno per costruire un oggetto Domanda generico e uno per le domande riguardanti le bandiere. Qui i parametri:  
+La classe è stata ideata per modellare una domanda. Sono presenti due costruttori, uno per costruire un oggetto Domanda generico e uno per le domande riguardanti le bandiere (prende un argomento in più, quello del percorso file). Qui i parametri:  
 
 - **String domanda** : stringa contenente la domanda
 - **String rispostaCorretta** : stringa per la risposta corretta
@@ -151,7 +151,7 @@ La classe è stata ideata per modellare una domanda. Sono presenti due costrutto
 
 ##### NazioneDAO
 
-La classe NazioneDAO è un'interfaccia che rappresenta il DAO per l'entità Nazione. Oltre ai metodi CRUD sono stati implementati anche **getNazioneByAlpha2Code** e **getNazioneByAlpha3Code**, metodi di query derivati che consentono di recuperare le nazioni dal database utilizzando i codici alfa a due e tre lettere.
+La classe NazioneDAO è un'interfaccia che rappresenta il DAO per l'entità Nazione. Oltre ai metodi CRUD sono stati implementati anche **getNazioneByAlpha2Code** e **getNazioneByAlpha3Code**, metodi di query derivati che consentono di recuperare le nazioni dal database utilizzando i codici alfa a due e tre lettere e il metodo **findByRegion()** per restituire le nazioni avente la regione passata come parametro.
 
 #### Services
 
@@ -164,9 +164,36 @@ La classe **NazioneService** è un'interfaccia che definisce i metodi di servizi
 - **Nazione getNazioneByAlpha2Code(String alpha2Code)** : ritorna un oggetto nazione dato un codice alfa2 come parametro
 - **Nazione getNazioneByAlpha3Code(String alpha3Code)** : ritorna un oggetto nazione dato un codice alfa3 come parametro
 - **public Nazione saveNazione(Nazione nazione)** : salva una nazione nel database
+- **List<Nazione> findByRegion(String region)** : restituisce una lista di nazioni avente la regione passata come parametro
 
 ##### NazioneServiceImp
 
 La classe **NazioneServiceImp** fornisce semplicemente l'implementazione dei metodi precedenti.
 
+##### DomandaService
 
+La classe **DomandaService** è un servizio che genera domande sui paesi, le loro capitali, bandiere e confini. Utilizza **NazioneDAO** per creare le domande.
+
+Il metodo **generaDomandaCapitale** genera una domanda che chiede  di identificare la capitale di una nazione e restituisce un oggetto di tipo domanda.
+
+```java
+public Domanda generaDomandaCapitale() {
+        
+        ...
+
+        return new Domanda(domanda, rispostaCorretta, opzioni);
+    }
+```
+
+```java
+List<Nazione> nazioni = dao.findAll();
+```
+
+Viene creata prima di tutto una lista contenente tutte le nazioni tramite il metodo **findAll()**.
+
+```java
+Random random = new Random();
+Nazione nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
+```
+
+In seguito viene creato un oggetto Random per generare un numero casuale compreso tra **0** e **nazioni.size() - 1**. Attraverso il metodo **get** chiamato sulla lista *nazioni*, ci viene restituita la nazione scelta casualmente.

@@ -35,6 +35,9 @@ public class Nazione {
 	
 	@Column(name = "borders", columnDefinition = "TEXT")
     private String borders;
+	
+	@Column(name = "region", nullable = false, length = 89)
+	private String region;
 
 	public int getId() {
 		return id;
@@ -89,6 +92,14 @@ public class Nazione {
 		this.alpha3Code = alpha3Code;
 	}
 	
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
 	public List<String> getBordersAsList(String bordersString) {
         List<String> borders = new ArrayList<>();
 

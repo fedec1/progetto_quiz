@@ -26,13 +26,16 @@ public class DomandaService {
         Random random = new Random();
         Nazione nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
 
+        String regione = nazioneScelta.getRegion(); // get la regione della nazione scelta
+        List<Nazione> nazioniStessaRegione = dao.findByRegion(regione); // get nazioni della stessa regione
+
         String domanda = "Qual è la capitale di questo stato?\n " + nazioneScelta.getName();
         String rispostaCorretta = nazioneScelta.getCapital();
 
         List<String> opzioni = new ArrayList<>();
         opzioni.add(rispostaCorretta);
         while (opzioni.size() < 4) {
-            Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
+            Nazione nazioneRandom = nazioniStessaRegione.get(random.nextInt(nazioniStessaRegione.size()));
             if (!opzioni.contains(nazioneRandom.getCapital())) {
                 opzioni.add(nazioneRandom.getCapital());
             }
