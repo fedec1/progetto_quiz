@@ -56,6 +56,30 @@ L'applicazione è stata ideata per aggiornare i valori della colonna 'flag' con 
 **folder** è un oggetto di tipo file che viene costruito con il folderPath precedente  
 **listOfFiles** è un array di files che viene creato chiamando il metodo listFiles su folder e aggiungendo un filtro (name) che vada a selezionare tutti i file di formato .svg  
 
+Dopo aver controllato che l'array appena creato non sia vuoto, creiamo la HashMap **alphaCodeToFilePathMap** per mappare  gli alphaCode2 delle nazioni ai nomi dei file delle rispettive bandiere in formato .svg.  
+
+```java
+Map<String, String> alphaCodeToFilePathMap = new HashMap<>();
+```
+
+Si effettua in seguito un ciclo, iterando sull'array di files per estrarre l'alphacode dalla stringa del file e mapparlo con il percorso corretto.
+
+```java
+for (File file : listOfFiles) { 
+                    if (file.isFile()) {
+                        String fileName = file.getName(); 
+                        String alphaCode = fileName.substring(0, 2).toUpperCase(); 
+                        alphaCodeToFilePathMap.put(alphaCode, folderPath + "\\" +  alphaCode + ".svg"); 
+                    }
+                }
+```
+
+Nella stringa **fileName** verrà contenuto il nome del file chiamando il metodo getName().  
+Nella stringa **alphaCode** viene estratto l'alphacode a due cifre dal nome precedente.  
+Il metodo **put**  chiamato sulla hashmap inserisce come key l'alphacode e come value il percorso alla cartella relativo, concatenato con il nome del file.
+
+
+
 ##### Classe Convertitore
 
 Classe di utility ideata per convertire il campo 'border' da formato text a lista.
