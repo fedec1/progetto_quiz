@@ -99,15 +99,44 @@ In seguito viene salvato il record corrispondente nel DB chiamando il metodo **s
 Per maggiori dettagli si veda la sezione *Repos*.  
 
 
-##### Classe Convertitore
-
-Classe di utility ideata per convertire il campo 'border' da formato text a lista.
-
 #### Entities
 
 ##### Classe Nazione
 
-La classe **Nazione** rappresenta un'entità che mappa la corrispondente tabella nel DB. Implementa i getters per alphacodes, nomi delle nazioni, capitali, bandiere e confini.
+La classe **Nazione** rappresenta un'entità che mappa la corrispondente tabella nel DB. Implementa i getters per alphacodes, nomi delle nazioni, capitali, bandiere e confini.  
+E' stato anche implementato il metodo **getBordersAsList()** che prende come parametro la stringa restituita da **getBorders()** e restituisce una lista di stringhe (in questo caso una lista di alpha3code). Nel dettaglio:  
+
+```java
+public List<String> getBordersAsList(String bordersString) {
+        List<String> borders = new ArrayList<>();
+
+        ....
+
+        return borders;
+    }
+```
+
+```java
+bordersString = bordersString.substring(1, bordersString.length() - 1);
+```
+
+Viene inizialmente creata una substring che rimuove le due parentesi quadre (all'inizio e alla fine).  
+
+```java
+String[] borderArray = bordersString.split(",");
+```
+
+Viene poi creato un array di stringhe **borderArray** con la virgola come separatore.
+
+```java
+for (String border : borderArray) {
+            borders.add(border.trim().replaceAll("\"", "")); 
+        }
+```
+
+Il ciclo for in seguito rimuove tutti gli eventuali spazi bianchi rimasti e le occorrenze dei doppi apici, in modo da ritornare un alpha3code pulito.  
+
+
 
 #### Repos
 

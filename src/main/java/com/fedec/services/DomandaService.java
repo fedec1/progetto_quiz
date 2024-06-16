@@ -75,7 +75,7 @@ public class DomandaService {
         Random random = new Random();
         Nazione nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
 
-        List<String> confini = nazioneScelta.getBorders();
+        List<String> confini = nazioneScelta.getBordersAsList(nazioneScelta.getBorders());
         if (confini == null || confini.isEmpty()) {
             throw new IllegalStateException("La nazione scelta non ha nazioni confinanti.");
         }
