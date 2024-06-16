@@ -52,9 +52,9 @@ L'applicazione è stata ideata per aggiornare i valori della colonna 'flag' con 
 ```
 
 
-**folderPath** è una variabile contenente il percorso alla cartella contenente le immagini delle bandiere in formato .svg. Si può modificare quest'ultima a piacimento nel caso si volesse cambiare il nome della cartella o il percorso.
-**folder** è un oggetto di tipo file che viene costruito con il folderPath precedente
-**listOfFiles** è un array di files che viene creato chiamando il metodo listFiles su folder e aggiungendo un filtro (name) che vada a selezionare tutti i file di formato .svg
+**folderPath** è una variabile contenente il percorso alla cartella contenente le immagini delle bandiere in formato .svg. Si può modificare quest'ultima a piacimento nel caso si volesse cambiare il nome della cartella o il percorso.  
+**folder** è un oggetto di tipo file che viene costruito con il folderPath precedente  
+**listOfFiles** è un array di files che viene creato chiamando il metodo listFiles su folder e aggiungendo un filtro (name) che vada a selezionare tutti i file di formato .svg  
 
 ##### Classe Convertitore
 
