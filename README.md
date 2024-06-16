@@ -237,5 +237,9 @@ Le opzioni vengono poi permutate casualmente con il metodo shuffle e finalmente 
 Collections.shuffle(opzioni);
 ```
 
+Il metodo **generaDomandaBandiere()** si comporta nel medesimo modo. Differisce nel non creare una sottolista di nazioni della stessa regione (non è detto che bandiere simili implichi nazioni vicine) e nel ritornare una domanda con un parametro in più, ovvero il path dell'immagine della bandiera.  
+
+Il metodo **generaDomandaConfini()** funziona in maniera simile. La differenza sta nell'ulteriore controllo aggiunto nel ciclo while, in modo tale che non venga aggiunta un'altra nazione confinante oltre alla risposta corretta nelle opzioni.
+
 
 

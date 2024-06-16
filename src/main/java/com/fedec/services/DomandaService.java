@@ -2,8 +2,10 @@ package com.fedec.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,7 +92,8 @@ public class DomandaService {
         opzioni.add(rispostaCorretta);
         while (opzioni.size() < 4) {
             Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
-            if (!opzioni.contains(nazioneRandom.getName())) {
+            // Assicurati che la nazione random non sia già nelle opzioni e non sia un confine
+            if (!opzioni.contains(nazioneRandom.getName()) && !confini.contains(nazioneRandom.getAlpha3Code())) {
                 opzioni.add(nazioneRandom.getName());
             }
         }
