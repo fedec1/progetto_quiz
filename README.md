@@ -78,6 +78,25 @@ Nella stringa **fileName** verrà contenuto il nome del file chiamando il metodo
 Nella stringa **alphaCode** viene estratto l'alphacode a due cifre dal nome precedente.  
 Il metodo **put**  chiamato sulla hashmap inserisce come key l'alphacode e come value il percorso alla cartella relativo, concatenato con il nome del file.
 
+Viene in seguito effettuato un secondo ciclo for-each per andare ad aggiornare correttamente il campo 'flag' DB con i nuovi percorsi generati precedentemente.
+
+```java
+for (Map.Entry<String, String> entry : alphaCodeToFilePathMap.entrySet()) {
+                    String alphaCode = entry.getKey(); 
+                    String filePath = entry.getValue(); 
+
+                    Nazione nazione = nazioneService.getNazioneByAlpha2Code(alphaCode); 
+                    if (nazione != null) { 
+                        nazione.setBandiera(filePath); 
+                        nazioneService.saveNazione(nazione); 
+                    }
+                }
+```
+
+Per ogni entry della hashmap precedente vengono estratti **alphaCode** (la key) e **filePath** (il valore).  
+In seguito viene creata una variabile nazione chiamando il metodo **getNazioneByAlpha2Code** con parametro alphaCode, per cercare la nazione corrispondente all'alphacode appena estratto.  
+In seguito viene salvato il record corrispondente nel DB chiamando il metodo **saveNazione()**.  
+Per maggiori dettagli si veda la sezione *Repos*.  
 
 
 ##### Classe Convertitore
