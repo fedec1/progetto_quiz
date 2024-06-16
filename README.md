@@ -211,3 +211,31 @@ String rispostaCorretta = nazioneScelta.getCapital();
 
 Successivamente viene scritta la domanda, concatenando una stringa costante con il nome della nazione scelta.  
 La stringa **rispostaCorretta** contiene invece la capitale della nazione scelta.
+
+```java
+List<String> opzioni = new ArrayList<>();
+```
+Viene creata una lista di opzioni.  
+
+```java
+opzioni.add(rispostaCorretta);
+```
+A questa viene aggiunta inizialmente la risposta corretta. In seguito viene effettuato un ciclo for per aggiungerne altre casualmente.  
+
+```java
+while (opzioni.size() < 4) {
+            Nazione nazioneRandom = nazioniStessaRegione.get(random.nextInt(nazioniStessaRegione.size()));
+            if (!opzioni.contains(nazioneRandom.getCapital())) {
+                opzioni.add(nazioneRandom.getCapital());
+            }
+        }
+```
+
+Le opzioni vengono poi permutate casualmente con il metodo shuffle e finalmente viene restituita la domanda.
+
+```java
+Collections.shuffle(opzioni);
+```
+
+
+
