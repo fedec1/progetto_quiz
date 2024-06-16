@@ -197,3 +197,17 @@ Nazione nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
 ```
 
 In seguito viene creato un oggetto Random per generare un numero casuale compreso tra **0** e **nazioni.size() - 1**. Attraverso il metodo **get** chiamato sulla lista *nazioni*, ci viene restituita la nazione scelta casualmente.
+
+```java
+String regione = nazioneScelta.getRegion(); 
+List<Nazione> nazioniStessaRegione = dao.findByRegion(regione); 
+```
+Viene poi chiamato il metodo **getRegion()** sulla nazione scelta per conoscerne il continente di appartenenza. In seguito viene creata una sottolista di nazioni avente la stessa region della nazione scelta.  L'idea è quella di limitare le opzioni disponibili per la domanda a nazioni "più simili" tra di loro, in modo da non farla risultare troppo semplice.  
+
+```java
+String domanda = "Qual è la capitale di questo stato?\n " + nazioneScelta.getName();
+String rispostaCorretta = nazioneScelta.getCapital();
+```
+
+Successivamente viene scritta la domanda, concatenando una stringa costante con il nome della nazione scelta.  
+La stringa **rispostaCorretta** contiene invece la capitale della nazione scelta.
