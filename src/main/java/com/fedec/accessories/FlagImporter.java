@@ -32,7 +32,7 @@ public class FlagImporter {
     @Bean
     public CommandLineRunner importBandiere() {
         return args -> {
-            String folderPath = ".\\maboglia country-flags main svg"; //percorso relativo della cartella contenente le bandiere
+            String folderPath = ".\\bandiere-nazioni"; //percorso relativo della cartella contenente le bandiere
             File folder = new File(folderPath); //crea un nuovo oggetto file, con percorso la cartella delle bandiere
             File[] listOfFiles = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".svg")); //se il file termina per .svg, esso viene aggiunto all'array di files
 
@@ -42,7 +42,7 @@ public class FlagImporter {
                     if (file.isFile()) {
                         String fileName = file.getName(); //restituisce il nome del file(ad esempio it.svg)
                         String alphaCode = fileName.substring(0, 2).toUpperCase(); //prende i primi due caratteri del file e li converte in maiusc
-                        alphaCodeToFilePathMap.put(alphaCode, "." + folderPath + "\\" +  alphaCode + ".svg"); //mappa l'alphacode al percorso assoluto del file
+                        alphaCodeToFilePathMap.put(alphaCode, folderPath + "\\" +  alphaCode + ".svg"); //mappa l'alphacode al percorso relativo del file
                     }
                 }
 
