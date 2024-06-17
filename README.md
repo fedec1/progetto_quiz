@@ -34,6 +34,12 @@ Il database è stato fornito inizialmente con i seguenti campi:
 
 Il DB è stato poi aggiornato inserendo una Primary Key ID e in java è stata costruita una classe per modificare i valori del campo 'flag', contenente link obsoleti, aggiornandoli con i percorsi relativi alla cartella delle immagini.
 
+E' stato in seguito creato un secondo database in cui inserire i dati relativi alle sessioni di gioco salvate con i seguenti campi:  
+
+- **username** : contiene l'username dell'utente della sessione di gioco
+- **score** : contiene il punteggio della sessione di gioco
+- **type** : identifica il tipo di quiz della sessione
+
 ### Java Back-end
 
 #### Accessories
