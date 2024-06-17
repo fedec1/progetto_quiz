@@ -1,13 +1,27 @@
 let domande = [];
 let domandaCorrente = 0;
 let punteggio = 0;
+let username = '';
+let quizType = '';
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('miste').addEventListener('click', () => loadQuiz('miste'));
-    document.getElementById('quizCapitale').addEventListener('click', () => loadQuiz('quizcapitale'));
-    document.getElementById('quizBandiere').addEventListener('click', () => loadQuiz('quizbandiere'));
-    document.getElementById('quizConfini').addEventListener('click', () => loadQuiz('quizconfini'));
+    document.getElementById('miste').addEventListener('click', () => startQuiz('miste'));
+    document.getElementById('quizCapitale').addEventListener('click', () => startQuiz('quizcapitale'));
+    document.getElementById('quizBandiere').addEventListener('click', () => startQuiz('quizbandiere'));
+    document.getElementById('quizConfini').addEventListener('click', () => startQuiz('quizconfini'));
 });
+
+function startQuiz(type) {
+    username = prompt('Inserisci il tuo username:');
+    if (!username) {
+        alert('Devi inserire un username per iniziare il quiz.');
+        return;
+    }
+    quizType = type;
+    document.getElementById('quiz-selection').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    loadQuiz(type);
+}
 
 function loadQuiz(type) {
     fetch(`/api/${type}`)
@@ -68,5 +82,38 @@ function verificaRisposta(selectedOption, correctAnswer) {
 function mostraRisultato() {
     const questionContainer = document.getElementById('question-container');
     questionContainer.innerHTML = `<p>Hai completato il quiz! Il tuo punteggio è ${punteggio} su ${domande.length}.</p>`;
+
+    const sessionData = {
+        username: username,
+        type: quizType,
+        score: punteggio
+    };
+
+    console.log('Sending session data:', sessionData);
+
+    fetch('/api/saveSession', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(sessionData)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Sessione di gioco salvata con successo');
+        } else {
+            response.text().then(text => console.error('Errore nel salvataggio della sessione di gioco:', response.status, text));
+        }
+    })
+    .catch(error => {
+        console.error('Error saving game session:', error);
+    });
+
+    // Reset quiz interface after saving
+    setTimeout(() => {
+        document.getElementById('quiz-selection').style.display = 'block';
+        document.getElementById('quiz-container').style.display = 'none';
+    }, 3000); // Ritarda di 3 secondi prima di resettare l'interfaccia
 }
+
 

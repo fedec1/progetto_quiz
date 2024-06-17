@@ -73,13 +73,15 @@ public class DomandaService {
     @Transactional(readOnly = true)
     public Domanda generaDomandaConfini() {
         List<Nazione> nazioni = dao.findAll();
-        
-        Random random = new Random();
-        Nazione nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
 
-        List<String> confini = nazioneScelta.getBordersAsList(nazioneScelta.getBorders());
-        if (confini == null || confini.isEmpty()) {
-            throw new IllegalStateException("La nazione scelta non ha nazioni confinanti.");
+        Random random = new Random();
+        Nazione nazioneScelta = null;
+        List<String> confini = new ArrayList<>();
+
+        // while  fino a trovare una nazione con confini
+        while (confini.isEmpty()) {
+            nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
+            confini = nazioneScelta.getBordersAsList(nazioneScelta.getBorders());
         }
 
         String domanda = "Con quale nazione confina " + nazioneScelta.getName() + "?";
@@ -87,12 +89,15 @@ public class DomandaService {
 
         List<String> opzioni = new ArrayList<>();
         opzioni.add(rispostaCorretta);
+
+      
         while (opzioni.size() < 4) {
             Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
             if (!opzioni.contains(nazioneRandom.getName()) && !confini.contains(nazioneRandom.getAlpha3Code())) {
                 opzioni.add(nazioneRandom.getName());
             }
         }
+
         Collections.shuffle(opzioni);
 
         return new Domanda(domanda, rispostaCorretta, opzioni);
