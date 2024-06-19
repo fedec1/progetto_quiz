@@ -34,6 +34,12 @@ Il database è stato fornito inizialmente con i seguenti campi:
 
 Il DB è stato poi aggiornato inserendo una Primary Key ID e in java è stata costruita una classe per modificare i valori del campo 'flag', contenente link obsoleti, aggiornandoli con i percorsi relativi alla cartella delle immagini.
 
+E' stato in seguito creato un secondo database in cui inserire i dati relativi alle sessioni di gioco salvate con i seguenti campi:  
+
+- **username** : contiene l'username dell'utente della sessione di gioco
+- **score** : contiene il punteggio della sessione di gioco
+- **type** : identifica il tipo di quiz della sessione
+
 ### Java Back-end
 
 #### Accessories
@@ -134,7 +140,11 @@ for (String border : borderArray) {
         }
 ```
 
-Il ciclo for in seguito rimuove tutti gli eventuali spazi bianchi rimasti e le occorrenze dei doppi apici, in modo da ritornare un alpha3code pulito. 
+Il ciclo for in seguito rimuove tutti gli eventuali spazi bianchi rimasti e le occorrenze dei doppi apici, in modo da ritornare un alpha3code pulito.
+
+##### Classe Sessione  
+
+La classe è stata creata per rappresentare una sessione di gioco e mappare la relativa tabella nel DB. Sono stati implementati i getters and setters per i campi *username*, *type* e *score*.
 
 ##### Classe Domanda
 
@@ -153,6 +163,10 @@ La classe è stata ideata per modellare una domanda. Sono presenti due costrutto
 
 La classe NazioneDAO è un'interfaccia che rappresenta il DAO per l'entità Nazione. Oltre ai metodi CRUD sono stati implementati anche **getNazioneByAlpha2Code** e **getNazioneByAlpha3Code**, metodi di query derivati che consentono di recuperare le nazioni dal database utilizzando i codici alfa a due e tre lettere e il metodo **findByRegion()** per restituire le nazioni avente la regione passata come parametro.
 
+##### SessioneDAO
+
+La classe SessioneDAO è un'interfaccia che rappresenta il DAO per la Sessione. Per il momento estende unicamente JpaRepository.
+
 #### Services
 
 ##### NazioneService
@@ -169,6 +183,16 @@ La classe **NazioneService** è un'interfaccia che definisce i metodi di servizi
 ##### NazioneServiceImp
 
 La classe **NazioneServiceImp** fornisce semplicemente l'implementazione dei metodi precedenti.
+
+##### SessioneService
+
+La classe **SessioneService** è un'interfaccia che al momento definisce un unico metodo di servizio per l'entità **Sessione**.
+
+- **void saveSession(String username, String quizType, int punteggio)** : salva una sessione di gioco nel db
+
+##### SessioneServiceImp
+
+La classe **SessioneServiceImp** fornisce l'implementazione dei metodi precedenti.
 
 ##### DomandaService
 
@@ -249,8 +273,16 @@ I metodi **generaQuizCapitali**, **generaQuizConfini** e **generaQuizBandiere** 
 
 ##### QuizController
 
-La classe **QuizController** è un controller REST che gestisce le richieste HTTP per restituire le liste di domande. Utilizza il servizio DomandaService per generare le domande e le restituisce come risposte alle richieste HTTP. Ogni metodo gestisce un endpoint specifico e restituisce un elenco di domande.
+La classe **QuizController** è un controller REST che gestisce le richieste HTTP GET e POST attraverso i servizi **NazioneService** e **SessioneService**. Qui i metodi:  
 
+- **public List<Domanda> getDomandeCapitali()** : restituisce un quiz di 15 domande sulle capitali (GET)
+- **public List<Domanda> getDomandeBandiere()** : restituisce un quiz di 15 domande sulle bandiere (GET)
+- **public List<Domanda> getDomandeConfini()** : restituisce un quiz di 15 domande sui confini (GET)
+- **public List<Domanda> getDomandeMiste()** : restituisce un quiz di 15 domande miste (GET)  
+
+In questi ultimi due metodi è stato inoltre aggiunto un semplice ciclo per ripetere la generazione delle domande nel caso non abbia successo.  
+
+- **public ResponseEntity<Void> saveSession()** : prende come argomento una sessione in JSON e ne salva i valori di username, type e score nel DB (POST)
 
 
 
