@@ -19,7 +19,7 @@ public class SessioneServiceImp implements SessioneService {
         sessione.setTipoQuiz(quizType);
         sessione.setScore(punteggio);
 
-        System.out.println("Saving session to DB: " + sessione); // Log della sessione salvata
+        System.out.println("Saving session to DB: " + sessione);
 
         dao.save(sessione);
     }

@@ -65,7 +65,7 @@ public class QuizController {
              int score = (int) payload.get("score");
 
              // Log per debug
-             System.out.println("Received session data:");
+             System.out.println("Sessione:");
              System.out.println("Username: " + username);
              System.out.println("Type: " + type);
              System.out.println("Score: " + score);
