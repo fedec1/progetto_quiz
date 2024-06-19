@@ -69,11 +69,11 @@ public class QuizController {
      }
      
      @PostMapping("saveSession")
-     public ResponseEntity<Void> saveSession(@RequestBody Map<String, Object> payload) {
+     public ResponseEntity<Void> saveSession(@RequestBody Map<String, Object> sessione) {
          try {
-             String username = (String) payload.get("username");
-             String type = (String) payload.get("type");
-             int score = (int) payload.get("score");
+             String username = (String) sessione.get("username");
+             String type = (String) sessione.get("type");
+             int score = (int) sessione.get("score");
 
              // Log per debug
              System.out.println("Sessione:");
