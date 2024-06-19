@@ -1,4 +1,4 @@
-package com.fedec.entities;
+ package com.fedec.entities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +38,9 @@ public class Nazione {
 	
 	@Column(name = "region", nullable = false, length = 89)
 	private String region;
+	
+	@Column(name = "difficulty", nullable = false, length = 2)
+	private int difficulty;
 
 	public int getId() {
 		return id;
@@ -98,6 +101,14 @@ public class Nazione {
 
 	public void setRegion(String region) {
 		this.region = region;
+	}
+
+	public int getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(int difficulty) {
+		this.difficulty = difficulty;
 	}
 
 	public List<String> getBordersAsList(String bordersString) {

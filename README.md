@@ -12,7 +12,7 @@ Sviluppo di un'applicazione web che mostri 15 domande a risposta multipla all'ut
 
 ### Architettura del Database
 
-Il database è stato fornito inizialmente con i seguenti campi:
+La tabella **nazioni** è stata fornita inizialmente con i seguenti campi:
 
 - *alpha2code* : contiene gli identificativi a due lettere per le nazioni (es. IT)
 - *alpha3code* : contiene gli identificativi a tre lettere per le nazioni (es. ITA)
@@ -32,9 +32,9 @@ Il database è stato fornito inizialmente con i seguenti campi:
 - *region* : continente di appartenenza
 - *translations* : contiene un json per le traduzioni del nome nazione nelle altre lingue disponibili
 
-Il DB è stato poi aggiornato inserendo una Primary Key ID e in java è stata costruita una classe per modificare i valori del campo 'flag', contenente link obsoleti, aggiornandoli con i percorsi relativi alla cartella delle immagini.
+La tabella è stata poi aggiornata inserendo una Primary Key ID, un campo *difficulty* e in java è stata costruita una classe per modificare i valori del campo 'flag', contenente link obsoleti, aggiornandoli con i percorsi relativi alla cartella delle immagini.
 
-E' stato in seguito creato un secondo database in cui inserire i dati relativi alle sessioni di gioco salvate con i seguenti campi:  
+E' stato in seguito creato una seconda tabella **sessions** in cui inserire i dati relativi alle sessioni di gioco salvate con i seguenti campi:  
 
 - **username** : contiene l'username dell'utente della sessione di gioco
 - **score** : contiene il punteggio della sessione di gioco
