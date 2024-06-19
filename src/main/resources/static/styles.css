@@ -65,6 +65,15 @@ h1 {
     text-align: center;
 }
 
+/* Stile per l'immagine della bandiera nel quiz */
+.flag-image {
+    max-width: 100%;
+    height: 100px; /* Rimuoviamo l'altezza fissa per mantenere proporzioni */
+    display: block; /* Impostiamo l'immagine come blocco per centrarla */
+    margin: 10px auto; /* Margini automatici a sinistra e a destra per centrare l'immagine */
+}
+
+
 
 
 
