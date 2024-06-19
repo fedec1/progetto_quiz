@@ -10,9 +10,10 @@ import com.fedec.entities.Nazione;
 @Repository
 public interface NazioneDAO extends JpaRepository<Nazione, Integer> {
 	
-	//derived query
+	//query derivate
 	Nazione getNazioneByAlpha2Code(String alpha2Code);
 	Nazione getNazioneByAlpha3Code(String alpha3Code);
 	List<Nazione> findByRegion(String region);
+	List<Nazione> findByDifficulty(int difficulty);
 	
 }

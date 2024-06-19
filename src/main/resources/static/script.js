@@ -3,12 +3,16 @@ let domandaCorrente = 0;
 let punteggio = 0;
 let username = '';
 let quizType = '';
+let difficolta = 1;
 
 document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('miste').addEventListener('click', () => startQuiz('miste'));
     document.getElementById('quizCapitale').addEventListener('click', () => startQuiz('quizcapitale'));
     document.getElementById('quizBandiere').addEventListener('click', () => startQuiz('quizbandiere'));
     document.getElementById('quizConfini').addEventListener('click', () => startQuiz('quizconfini'));
+    document.getElementById('difficolta').addEventListener('change', (event) => {
+        difficolta = event.target.value;
+    });
 });
 
 function startQuiz(type) {
@@ -20,11 +24,11 @@ function startQuiz(type) {
     quizType = type;
     document.getElementById('quiz-selection').style.display = 'none';
     document.getElementById('quiz-container').style.display = 'block';
-    loadQuiz(type);
+    loadQuiz(type, difficolta);
 }
 
-function loadQuiz(type) {
-    fetch(`/api/${type}`)
+function loadQuiz(type, difficolta) {
+    fetch(`/api/${type}?difficolta=${difficolta}`)
         .then(response => response.json())
         .then(data => {
             domande = data;
@@ -115,5 +119,4 @@ function mostraRisultato() {
         document.getElementById('quiz-container').style.display = 'none';
     }, 3000); // Ritarda di 3 secondi prima di resettare l'interfaccia
 }
-
 

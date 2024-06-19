@@ -34,6 +34,8 @@ La tabella **nazioni** è stata fornita inizialmente con i seguenti campi:
 
 La tabella è stata poi aggiornata inserendo una Primary Key ID, un campo *difficulty* e in java è stata costruita una classe per modificare i valori del campo 'flag', contenente link obsoleti, aggiornandoli con i percorsi relativi alla cartella delle immagini.
 
+La difficoltà è stata scelta arbitrariamente ed è rappresentata da un numero che va da 1 a 3. L'idea è stata quella di assegnare un livello di difficoltà più alto a nazioni poco conosciute.
+
 E' stato in seguito creato una seconda tabella **sessions** in cui inserire i dati relativi alle sessioni di gioco salvate con i seguenti campi:  
 
 - **username** : contiene l'username dell'utente della sessione di gioco
@@ -162,6 +164,7 @@ La classe è stata ideata per modellare una domanda. Sono presenti due costrutto
 ##### NazioneDAO
 
 La classe NazioneDAO è un'interfaccia che rappresenta il DAO per l'entità Nazione. Oltre ai metodi CRUD sono stati implementati anche **getNazioneByAlpha2Code** e **getNazioneByAlpha3Code**, metodi di query derivati che consentono di recuperare le nazioni dal database utilizzando i codici alfa a due e tre lettere e il metodo **findByRegion()** per restituire le nazioni avente la regione passata come parametro.
+E' stato in seguito implementato il metodo **findByDifficulty** per restituire una lista di nazioni avente la difficoltà passata come parametro (1-3)
 
 ##### SessioneDAO
 
@@ -201,7 +204,7 @@ La classe **DomandaService** è un servizio che genera domande sui paesi, le lor
 Il metodo **generaDomandaCapitale** genera una domanda che chiede  di identificare la capitale di una nazione e restituisce un oggetto di tipo domanda.
 
 ```java
-public Domanda generaDomandaCapitale() {
+public Domanda generaDomandaCapitale(int difficoltà) {
         
         ...
 
@@ -210,10 +213,10 @@ public Domanda generaDomandaCapitale() {
 ```
 
 ```java
-List<Nazione> nazioni = dao.findAll();
+List<Nazione> nazioni = dao.findByDifficulty(difficoltà);
 ```
 
-Viene creata prima di tutto una lista contenente tutte le nazioni tramite il metodo **findAll()**.
+Viene creata prima di tutto una lista contenente tutte le nazioni della difficoltà passata come parametro tramite il metodo **findByDifficulty()**.
 
 ```java
 Random random = new Random();
