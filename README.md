@@ -140,7 +140,11 @@ for (String border : borderArray) {
         }
 ```
 
-Il ciclo for in seguito rimuove tutti gli eventuali spazi bianchi rimasti e le occorrenze dei doppi apici, in modo da ritornare un alpha3code pulito. 
+Il ciclo for in seguito rimuove tutti gli eventuali spazi bianchi rimasti e le occorrenze dei doppi apici, in modo da ritornare un alpha3code pulito.
+
+##### Classe Sessione  
+
+La classe è stata creata per rappresentare una sessione di gioco e mappare la relativa tabella nel DB. Sono stati implementati i getters and setters per i campi *username*, *type* e *score*.
 
 ##### Classe Domanda
 
@@ -159,6 +163,10 @@ La classe è stata ideata per modellare una domanda. Sono presenti due costrutto
 
 La classe NazioneDAO è un'interfaccia che rappresenta il DAO per l'entità Nazione. Oltre ai metodi CRUD sono stati implementati anche **getNazioneByAlpha2Code** e **getNazioneByAlpha3Code**, metodi di query derivati che consentono di recuperare le nazioni dal database utilizzando i codici alfa a due e tre lettere e il metodo **findByRegion()** per restituire le nazioni avente la regione passata come parametro.
 
+##### SessioneDAO
+
+La classe SessioneDAO è un'interfaccia che rappresenta il DAO per la Sessione. Per il momento estende unicamente JpaRepository.
+
 #### Services
 
 ##### NazioneService
@@ -171,6 +179,12 @@ La classe **NazioneService** è un'interfaccia che definisce i metodi di servizi
 - **Nazione getNazioneByAlpha3Code(String alpha3Code)** : ritorna un oggetto nazione dato un codice alfa3 come parametro
 - **public Nazione saveNazione(Nazione nazione)** : salva una nazione nel database
 - **List<Nazione> findByRegion(String region)** : restituisce una lista di nazioni avente la regione passata come parametro
+
+##### SessioneService
+
+La classe **SessioneService** è un'interfaccia che al momento definisce un unico metodo di servizio per l'entità **Sessione**.
+
+- **void saveSession(String username, String quizType, int punteggio)** : salva una sessione di gioco nel db
 
 ##### NazioneServiceImp
 
