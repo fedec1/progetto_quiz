@@ -280,7 +280,7 @@ La classe **QuizController** è un controller REST che gestisce le richieste HTT
 - **public List<Domanda> getDomandeConfini()** : restituisce un quiz di 15 domande sui confini (GET)
 - **public List<Domanda> getDomandeMiste()** : restituisce un quiz di 15 domande miste (GET)  
 
-In questo metodo è stato inoltre aggiunto un semplice ciclo per ripetere la generazione delle domande nel caso non abbia successo.
+In questi ultimi due metodi è stato inoltre aggiunto un semplice ciclo per ripetere la generazione delle domande nel caso non abbia successo.
 
 
 

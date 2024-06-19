@@ -37,7 +37,18 @@ public class QuizController {
      
      @GetMapping("quizconfini")
      public List<Domanda> getDomandeConfini() {
-         return domandaService.generaQuizConfini(15);
+    	 
+    	 List<Domanda> domande = null;
+         boolean noError = false;
+    	 while (!noError) {
+             try {
+                 domande = domandaService.generaQuizConfini(15);;
+                 noError = true;
+             } catch (Exception e) {
+                 System.err.println("Errore durante la generazione delle domande miste: " + e.getMessage());
+             }
+         }
+         return domande;
      }
     
      @GetMapping("miste")
