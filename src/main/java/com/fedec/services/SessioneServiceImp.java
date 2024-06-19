@@ -13,11 +13,12 @@ public class SessioneServiceImp implements SessioneService {
 	private SessioneDAO dao;
 
 	@Override
-	public void saveSession(String username, String quizType, int punteggio) {
+	public void saveSession(String username, String quizType, int punteggio, int difficulty) {
         Sessione sessione = new Sessione();
         sessione.setUsername(username);
         sessione.setTipoQuiz(quizType);
         sessione.setScore(punteggio);
+        sessione.setDifficulty(difficulty);
 
         System.out.println("Saving session to DB: " + sessione);
 

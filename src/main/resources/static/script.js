@@ -1,122 +1,153 @@
-let domande = [];
-let domandaCorrente = 0;
-let punteggio = 0;
+// Variabili globali per gestire lo stato del quiz
+let quizData = []; // Contiene le domande e risposte del quiz
+let currentQuestionIndex = 0; // Indice della domanda corrente
+let score = 0; // Punteggio del quiz
 let username = '';
-let quizType = '';
-let difficolta = 1;
+let tipoQuiz = '';
+let difficolta = '';
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('miste').addEventListener('click', () => startQuiz('miste'));
-    document.getElementById('quizCapitale').addEventListener('click', () => startQuiz('quizcapitale'));
-    document.getElementById('quizBandiere').addEventListener('click', () => startQuiz('quizbandiere'));
-    document.getElementById('quizConfini').addEventListener('click', () => startQuiz('quizconfini'));
-    document.getElementById('difficolta').addEventListener('change', (event) => {
-        difficolta = event.target.value;
-    });
-});
+// Funzione per avviare il quiz
+function avviaQuiz() {
+    tipoQuiz = document.getElementById('quiz-type').value;
+    difficolta = parseInt(document.getElementById('difficolta').value); // Converti in intero
+    username = document.getElementById('username').value;
 
-function startQuiz(type) {
-    username = prompt('Inserisci il tuo username:');
-    if (!username) {
-        alert('Devi inserire un username per iniziare il quiz.');
-        return;
-    }
-    quizType = type;
-    document.getElementById('quiz-selection').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'block';
-    loadQuiz(type, difficolta);
-}
-
-function loadQuiz(type, difficolta) {
-    fetch(`/api/${type}?difficolta=${difficolta}`)
-        .then(response => response.json())
-        .then(data => {
-            domande = data;
-            domandaCorrente = 0;
-            punteggio = 0;
-            visualizzaDomanda();
+    // Chiamata API per ottenere le domande
+    fetch(`/api/${tipoQuiz}?difficolta=${difficolta}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Errore nella risposta del server');
+            }
+            return response.json();
         })
-        .catch(error => {
-            console.error('Error fetching questions:', error);
-        });
+        .then(data => {
+            quizData = data; // Salva le domande ricevute
+            mostraDomandaCorrente();
+        })
+        .catch(error => console.error('Errore:', error));
 }
 
-function visualizzaDomanda() {
-    if (domandaCorrente >= domande.length) {
-        mostraRisultato();
+// Funzione per mostrare la domanda corrente
+function mostraDomandaCorrente() {
+    const quizSetup = document.getElementById('quiz-setup');
+    const questionContainer = document.getElementById('question-container');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+
+    // Nascondi il setup del quiz e mostra il contenitore delle domande
+    quizSetup.style.display = 'none';
+    questionContainer.style.display = 'block';
+
+    // Verifica se siamo alla fine del quiz
+    if (currentQuestionIndex >= quizData.length) {
+        mostraPunteggioFinale();
+        salvaSessione(username, tipoQuiz, score, difficolta); // Salva automaticamente la sessione alla fine del quiz
         return;
     }
 
-    const domanda = domande[domandaCorrente];
-    const questionElement = document.getElementById('question');
-    const optionsContainer = document.getElementById('options-container');
-    const imageContainer = document.getElementById('image-container');
+    const domandaCorrente = quizData[currentQuestionIndex];
 
-    questionElement.innerText = domanda.domanda;
+    // Mostra il testo della domanda
+    questionText.textContent = domandaCorrente.domanda;
+
+    // Pulisce le opzioni precedenti
     optionsContainer.innerHTML = '';
-    imageContainer.innerHTML = ''; // Clear the image container
 
-    if (domanda.path) {
-        const img = document.createElement('img');
-        img.src = domanda.path;
-        img.alt = "Bandiera";
-        img.style.width = "200px";
-        imageContainer.appendChild(img);
-    }
-
-    domanda.opzioni.forEach(option => {
+    // Mostra le opzioni di risposta
+    domandaCorrente.opzioni.forEach(opzione => {
         const button = document.createElement('button');
-        button.innerText = option;
-        button.onclick = () => verificaRisposta(option, domanda.rispostaCorretta);
+        button.textContent = opzione;
+        button.onclick = () => verificaRisposta(domandaCorrente.rispostaCorretta, opzione);
         optionsContainer.appendChild(button);
     });
+
+    // Gestione pulsanti Previous e Next
+    document.getElementById('prev-question-btn').style.display = currentQuestionIndex > 0 ? 'inline-block' : 'none';
+    document.getElementById('next-question-btn').style.display = currentQuestionIndex < quizData.length - 1 ? 'inline-block' : 'none';
 }
 
-function verificaRisposta(selectedOption, correctAnswer) {
-    if (selectedOption === correctAnswer) {
-        punteggio++;
-        alert('Risposta corretta!');
-    } else {
-        alert('Risposta sbagliata! La risposta corretta è: ' + correctAnswer);
+// Funzione per verificare la risposta dell'utente
+function verificaRisposta(rispostaCorretta, rispostaScelta) {
+    if (rispostaScelta === rispostaCorretta) {
+        score++;
     }
-    domandaCorrente++;
-    visualizzaDomanda();
+    // Passa alla prossima domanda
+    currentQuestionIndex++;
+    mostraDomandaCorrente();
 }
 
-function mostraRisultato() {
+// Funzione per mostrare il punteggio finale
+function mostraPunteggioFinale() {
     const questionContainer = document.getElementById('question-container');
-    questionContainer.innerHTML = `<p>Hai completato il quiz! Il tuo punteggio è ${punteggio} su ${domande.length}.</p>`;
+    const resultContainer = document.getElementById('result-container');
+    const finalScore = document.getElementById('final-score');
 
-    const sessionData = {
-        username: username,
-        type: quizType,
-        score: punteggio
+    // Nasconde il contenitore delle domande
+    questionContainer.style.display = 'none';
+
+    // Mostra il punteggio finale
+    finalScore.textContent = `Punteggio finale: ${score}`;
+    resultContainer.style.display = 'block';
+
+    // Gestione pulsante per ricominciare il quiz
+    document.getElementById('restart-quiz-btn').onclick = () => {
+        currentQuestionIndex = 0;
+        score = 0;
+        quizSetup.style.display = 'block';
+        resultContainer.style.display = 'none';
     };
+}
 
-    console.log('Sending session data:', sessionData);
+// Funzione per salvare la sessione
+function salvaSessione(username, tipoQuiz, score, difficolta) {
+    const sessione = {
+        username: username,
+        type: tipoQuiz,
+        score: score,
+        difficulty: difficolta
+    };
 
     fetch('/api/saveSession', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(sessionData)
+        body: JSON.stringify(sessione)
     })
-    .then(response => {
-        if (response.ok) {
-            console.log('Sessione di gioco salvata con successo');
-        } else {
-            response.text().then(text => console.error('Errore nel salvataggio della sessione di gioco:', response.status, text));
-        }
-    })
-    .catch(error => {
-        console.error('Error saving game session:', error);
-    });
-
-    // Reset quiz interface after saving
-    setTimeout(() => {
-        document.getElementById('quiz-selection').style.display = 'block';
-        document.getElementById('quiz-container').style.display = 'none';
-    }, 3000); // Ritarda di 3 secondi prima di resettare l'interfaccia
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Errore nel salvataggio della sessione');
+            }
+            console.log('Sessione salvata con successo');
+        })
+        .catch(error => console.error('Errore:', error));
 }
+
+// Event listener per avviare il quiz al click del pulsante
+document.getElementById('start-quiz-btn').addEventListener('click', avviaQuiz);
+
+// Event listener per la navigazione tra le domande
+document.getElementById('prev-question-btn').addEventListener('click', () => {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        mostraDomandaCorrente();
+    }
+});
+
+document.getElementById('next-question-btn').addEventListener('click', () => {
+    if (currentQuestionIndex < quizData.length - 1) {
+        currentQuestionIndex++;
+        mostraDomandaCorrente();
+    }
+});
+
+
+
+
+
+
+
+
+
+
 

@@ -75,14 +75,16 @@ public class QuizController {
              String username = (String) sessione.get("username");
              String type = (String) sessione.get("type");
              int score = (int) sessione.get("score");
+             int difficulty = (int) sessione.get("difficulty");
 
              // Log per debug
              System.out.println("Sessione:");
              System.out.println("Username: " + username);
              System.out.println("Type: " + type);
              System.out.println("Score: " + score);
+             System.out.println("Difficulty: " + difficulty);
 
-             sessioneService.saveSession(username, type, score);
+             sessioneService.saveSession(username, type, score, difficulty);
              return ResponseEntity.ok().build();
          } catch (Exception e) {
              e.printStackTrace();
