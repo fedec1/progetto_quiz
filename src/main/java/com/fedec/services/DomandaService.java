@@ -20,8 +20,8 @@ public class DomandaService {
     private NazioneDAO dao;
 
     @Transactional(readOnly = true)
-    public Domanda generaDomandaCapitale() {
-        List<Nazione> nazioni = dao.findAll();
+    public Domanda generaDomandaCapitale(int difficoltà) {
+        List<Nazione> nazioni = dao.findByDifficulty(difficoltà);
 
         Random random = new Random();
         Nazione nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
@@ -46,8 +46,8 @@ public class DomandaService {
     }
     
     @Transactional(readOnly = true)
-    public Domanda generaDomandaBandiere() {
-    	List<Nazione> nazioni = dao.findAll();
+    public Domanda generaDomandaBandiere(int difficoltà){
+    	List<Nazione> nazioni = dao.findByDifficulty(difficoltà);
     	Random random = new Random();
     	Nazione nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
     	String domanda = "A quale stato corrisponde questa bandiera?\n ";
@@ -69,8 +69,8 @@ public class DomandaService {
     }
 
     @Transactional(readOnly = true)
-    public Domanda generaDomandaConfini() {
-        List<Nazione> nazioni = dao.findAll();
+    public Domanda generaDomandaConfini(int difficoltà) {
+    	List<Nazione> nazioni = dao.findByDifficulty(difficoltà);
 
         Random random = new Random();
         Nazione nazioneScelta = null;
@@ -102,7 +102,7 @@ public class DomandaService {
     }
 
     @Transactional(readOnly = true)
-    public List<Domanda> generaDomandeMiste(int numeroDiDomande) {
+    public List<Domanda> generaDomandeMiste(int numeroDiDomande, int difficoltà) {
         List<Domanda> domande = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < numeroDiDomande; i++) {
@@ -110,13 +110,13 @@ public class DomandaService {
             try {
                 switch (tipoDomanda) {
                     case 0:
-                        domande.add(generaDomandaCapitale());
+                        domande.add(generaDomandaCapitale(difficoltà));
                         break;
                     case 1:
-                        domande.add(generaDomandaConfini());
+                        domande.add(generaDomandaConfini(difficoltà));
                         break;
                     case 2:
-                        domande.add(generaDomandaBandiere());
+                        domande.add(generaDomandaBandiere(difficoltà));
                         break;
                 }
             } catch (IllegalStateException e) {
@@ -127,26 +127,26 @@ public class DomandaService {
     }
     
     
-    public List <Domanda> generaQuizCapitali(int numeroDiDomande){
+    public List <Domanda> generaQuizCapitali(int numeroDiDomande, int difficoltà){
     	List<Domanda> domande = new ArrayList<>();
     	for (int i = 0; i < numeroDiDomande; i++) {
-    		domande.add(generaDomandaCapitale());
+    		domande.add(generaDomandaCapitale(difficoltà));
     	}
     	return domande;
     }
     
-    public List <Domanda> generaQuizBandiere(int numeroDiDomande){
+    public List <Domanda> generaQuizBandiere(int numeroDiDomande, int difficoltà){
     	List<Domanda> domande = new ArrayList<>();
     	for (int i = 0; i < numeroDiDomande; i++) {
-    		domande.add(generaDomandaBandiere());
+    		domande.add(generaDomandaBandiere(difficoltà));
     	}
     	return domande;
     }
     
-    public List <Domanda> generaQuizConfini(int numeroDiDomande){
+    public List <Domanda> generaQuizConfini(int numeroDiDomande, int difficoltà){
     	List<Domanda> domande = new ArrayList<>();
     	for (int i = 0; i < numeroDiDomande; i++) {
-    		domande.add(generaDomandaConfini());
+    		domande.add(generaDomandaConfini(difficoltà));
     	}
     	return domande;
     }

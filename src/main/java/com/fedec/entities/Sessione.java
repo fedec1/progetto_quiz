@@ -23,6 +23,9 @@ public class Sessione {
 	
 	@Column(name = "score")
 	private int score;
+	
+	@Column(name = "difficulty")
+	private int difficulty;
 
 
 
@@ -57,6 +60,17 @@ public class Sessione {
 	public void setScore(int score) {
 		this.score = score;
 	}
+
+
+	public int getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(int difficulty) {
+		this.difficulty = difficulty;
+	}
+	
+	
 	
 	
 	
