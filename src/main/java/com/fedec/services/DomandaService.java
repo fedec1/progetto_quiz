@@ -126,6 +126,39 @@ public class DomandaService {
         return domande;
     }
     
+    @Transactional(readOnly = true)
+    public Domanda generaDomandaMista() {
+    	Domanda d;
+    	Random random = new Random();
+    	int tipoDomanda = random.nextInt(3); // genera un numero casuale tra 0 e 2 per scegliere la domanda
+    	int i = 1;
+    	boolean isNotValid = false;
+    	
+    	do {
+	    
+	        switch (tipoDomanda) {
+	            case 0:
+	            	i = random.nextInt(3) + 1; // numero casuale tra 1 e 3 (valori del campo 'difficulty' nella tabella nazioni del db)
+	                d = generaDomandaCapitale(i);
+	                break;
+	            case 1:
+	            	i = random.nextInt(3) + 1; // numero casuale tra 1 e 3 (valori del campo 'difficulty' nella tabella nazioni del db)
+	                d = generaDomandaConfini(i);
+	                break;
+	            case 2:
+	            	i = random.nextInt(3) + 1; // numero casuale tra 1 e 3 (valori del campo 'difficulty' nella tabella nazioni del db)
+	                d = generaDomandaBandiere(i);
+	                break;
+	            default:
+	            	/**
+	            	 * i deve essere un numero maggiore di 0 altrimenti darà errore
+	            	 */
+	            	isNotValid = true;
+	                throw new IllegalStateException("Unexpected value: " + tipoDomanda);
+	        }
+    	} while (isNotValid);
+    	return d;
+    }
     
     public List <Domanda> generaQuizCapitali(int numeroDiDomande, int difficoltà){
     	List<Domanda> domande = new ArrayList<>();
