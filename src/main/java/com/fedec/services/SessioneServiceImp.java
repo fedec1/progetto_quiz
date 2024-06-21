@@ -1,5 +1,7 @@
 package com.fedec.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +26,17 @@ public class SessioneServiceImp implements SessioneService {
 
         dao.save(sessione);
     }
+
+	@Override
+	public List<Sessione> findByDifficulty(int difficulty) {
+		// TODO Auto-generated method stub
+		return dao.findByDifficulty(difficulty);
+	}
+
+	@Override
+	public List<Sessione> findByType(String type) {
+		// TODO Auto-generated method stub
+		return dao.findByType(type);
+	}
 
 }
