@@ -74,6 +74,13 @@ public class QuizController {
          return domande;
      }
      
+     @GetMapping("mista")
+     public Domanda getDomandaMista() {
+    	 Domanda d = domandaService.generaDomandaMista();
+    	 
+    	 return d;
+     }
+     
      @GetMapping("classifica")
      public List<Sessione> getClassifica(@RequestParam int difficolta, @RequestParam String type){
          return classificaService.generaClassifica(difficolta, type);
