@@ -16,8 +16,8 @@ body {
 
 .container {
   position: relative;
-  width: 1000px;
-  height: 600px;
+  width: 350px;
+  height: 600px; /* Increased height to accommodate additional content */
   border-radius: 20px;
   padding: 40px;
   box-sizing: border-box;
@@ -55,22 +55,6 @@ body {
   justify-content: flex-start;
 }
 
-.quiz-setup p {
-  width: 100%;
-  text-align: center;
-  position: relative;
-  top: 45px; /* Adjust this value to move the paragraph further down */
-}
-
-.container h1 {
-  position: absolute;
-  top: 20px; /* Adjust this value as needed for vertical spacing */
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2rem; /* Optional: Adjust font size if needed */
-  color: #1DA1F2;
-}
-
 label, input, button, select {
   display: block;
   width: 100%;
@@ -104,14 +88,14 @@ input, select {
 }
 
 button {
+  margin-top: auto;
   background: #1DA1F2;
-  height: 60px; /* Increased height for better appearance */
+  height: 40px;
   border-radius: 20px;
   cursor: pointer;
   font-weight: 900;
   box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
   transition: 0.5s;
-  margin: 10px 5px;
 }
 
 button:hover {
@@ -122,47 +106,6 @@ h1 {
   position: absolute;
   top: 0;
   left: 0;
-}
-
-.quiz-setup {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-grow: 1; /* Allow the quiz-setup to grow and take available space */
-  justify-content: space-between; /* Space out children elements to push the button to the bottom */
-}
-
-.quiz-setup p {
-  width: 100%;
-  text-align: center;
-}
-
-#button-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px; /* Adjusted gap for better spacing */
-  width: 100%;
-}
-
-#button-container button {
-  width: 100%;
-}
-
-.input-row {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 20px;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  width: 48%;
-}
-
-#difficolta {
-  width: 100%;
 }
 
 .question-text {
