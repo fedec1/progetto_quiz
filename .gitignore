@@ -1,6 +1,6 @@
 # Spring Boot
-*/application.properties
-*/pom.properties
+**/application.properties
+**/pom.properties
 target/classes/.reloadtrigger
 
 bin/src/main/resources/application.properties
