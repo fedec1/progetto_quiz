@@ -168,7 +168,13 @@ E' stato in seguito implementato il metodo **findByDifficulty** per restituire u
 
 ##### SessioneDAO
 
-La classe SessioneDAO è un'interfaccia che rappresenta il DAO per la Sessione. Per il momento estende unicamente JpaRepository.
+La classe SessioneDAO è un'interfaccia che rappresenta il DAO per la Sessione. E' stato implementato il seguente metodo di query derivata:  
+
+```java
+List<Sessione> findByTypeAndDifficultyOrderByScoreDesc(String type, int difficolta)
+```
+
+il quale ritorna una lista delle sessioni di gioco filtrate per tipologia di quiz e difficoltà (verrà poi richiamato da **ClassificaService**)
 
 #### Services
 
@@ -272,6 +278,12 @@ Il metodo **getDomandeMiste()** prende come parametro un intero n (indicante il 
 
 I metodi **generaQuizCapitali**, **generaQuizConfini** e **generaQuizBandiere** restituiscono invece una lista di domande spefifica.
 
+##### ClassificaService
+
+La classe ClassificaService implementa il metodo **GeneraClassifica** il quale prende come parametri la difficoltà (int) e la tipologia di quiz (String), e restituisce una lista di sessioni filtrate per i due parametri passati e ordinate per punteggio.
+
+
+
 #### Controllers
 
 ##### QuizController
@@ -281,7 +293,8 @@ La classe **QuizController** è un controller REST che gestisce le richieste HTT
 - **public List<Domanda> getDomandeCapitali()** : restituisce un quiz di 15 domande sulle capitali (GET)
 - **public List<Domanda> getDomandeBandiere()** : restituisce un quiz di 15 domande sulle bandiere (GET)
 - **public List<Domanda> getDomandeConfini()** : restituisce un quiz di 15 domande sui confini (GET)
-- **public List<Domanda> getDomandeMiste()** : restituisce un quiz di 15 domande miste (GET)  
+- **public List<Domanda> getDomandeMiste()** : restituisce un quiz di 15 domande miste (GET)
+- **public List<Sessione> getClassifica()** : restituisce una classifica di sessioni ordinate per score (GET)  
 
 In questi ultimi due metodi è stato inoltre aggiunto un semplice ciclo per ripetere la generazione delle domande nel caso non abbia successo.  
 

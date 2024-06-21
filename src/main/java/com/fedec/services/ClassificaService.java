@@ -14,7 +14,7 @@ public class ClassificaService {
 	@Autowired
 	private SessioneDAO dao;
 	
-	public List<Sessione> GeneraClassifica(int difficolta, String type){
+	public List<Sessione> generaClassifica(int difficolta, String type){
 		
 		return dao.findByTypeAndDifficultyOrderByScoreDesc(type, difficolta);
 		
