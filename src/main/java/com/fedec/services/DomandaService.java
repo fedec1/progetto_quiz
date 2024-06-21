@@ -74,7 +74,7 @@ public class DomandaService {
 
         Random random = new Random();
         Nazione nazioneScelta = null;
-        List<String> confini = new ArrayList<>();
+        List<String> confini = new ArrayList<>();  
 
         // while  fino a trovare una nazione con confini
         while (confini.isEmpty()) {
