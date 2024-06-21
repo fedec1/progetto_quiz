@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fedec.entities.Domanda;
+import com.fedec.entities.Sessione;
+import com.fedec.services.ClassificaService;
 import com.fedec.services.DomandaService;
 import com.fedec.services.SessioneService;
 
@@ -25,6 +27,9 @@ public class QuizController {
     
     @Autowired
     private SessioneService sessioneService;
+    
+    @Autowired
+    private ClassificaService classificaService;
 
      @GetMapping("quizcapitale")
      public List<Domanda> getDomandeCapitali(@RequestParam int difficolta) {
@@ -67,6 +72,11 @@ public class QuizController {
          }
 
          return domande;
+     }
+     
+     @GetMapping("classifica")
+     public List<Sessione> getClassifica(@RequestParam int difficolta, @RequestParam String type){
+         return classificaService.generaClassifica(difficolta, type);
      }
      
      @PostMapping("saveSession")
