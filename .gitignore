@@ -1,0 +1,9 @@
+# Spring Boot
+*/application.properties
+*/pom.properties
+*/.reloadtrigger
+
+accessories/
+controllers/
+services/
+static/
