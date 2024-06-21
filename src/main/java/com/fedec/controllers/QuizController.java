@@ -2,6 +2,7 @@ package com.fedec.controllers;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -72,6 +73,13 @@ public class QuizController {
          }
 
          return domande;
+     }
+     
+     @GetMapping("mista")
+     public Domanda getDomandaMista() {
+    	 Domanda d = domandaService.generaDomandaMista();
+    	 
+    	 return d;
      }
      
      @GetMapping("classifica")
