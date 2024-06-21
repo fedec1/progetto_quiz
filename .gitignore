@@ -1,9 +1,1 @@
-# Spring Boot
-**/application.properties
-**/pom.properties
-target/classes/.reloadtrigger
 
-bin/src/main/resources/application.properties
-src/main/resources/application.properties
-target/classes/META-INF/maven/com.fedec/quiz-countries/pom.properties
-target/classes/application.properties
