@@ -27,16 +27,14 @@ public class SessioneServiceImp implements SessioneService {
         dao.save(sessione);
     }
 
-	@Override
-	public List<Sessione> findByDifficulty(int difficulty) {
-		// TODO Auto-generated method stub
-		return dao.findByDifficulty(difficulty);
-	}
+	
 
 	@Override
-	public List<Sessione> findByType(String type) {
+	public List<Sessione> findByTypeAndDifficulty(String type, int difficolta) {
 		// TODO Auto-generated method stub
-		return dao.findByType(type);
+		return dao.findByTypeAndDifficultyOrderByScoreDesc(type, difficolta);
 	}
+
+	
 
 }
