@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz App</h1>
+        <div id="quiz-setup" class="quiz-setup">
+            <label for="quiz-type">Seleziona il tipo di quiz:</label>
+            <select id="quiz-type">
+                <option value="quizcapitale">Capitale</option>
+                <option value="quizbandiere">Bandiere</option>
+                <option value="quizconfini">Confini</option>
+                <option value="miste">Miste</option>
+            </select>
+            <label for="difficolta">Seleziona la difficoltà:</label>
+            <select id="difficolta">
+                <option value="1">Facile</option>
+                <option value="2">Medio</option>
+                <option value="3">Difficile</option>
+            </select>
+            <label for="username">Inserisci il tuo username:</label>
+            <input type="text" id="username" required>
+            <button id="start-quiz-btn" class="quiz-btn">Inizia Quiz</button>
+        </div>
+        <div id="question-container" class="question-container" style="display: none;">
+    <p id="question-text" class="question-text"></p>
+    <img id="flag-image" src="" alt="Flag" class="flag-image" style="display: none;"> <!-- Elemento per visualizzare l'immagine della bandiera -->
+    <div id="options-container" class="options-container"></div>
+    <div class="btn-container">
+        <button id="prev-question-btn" class="quiz-btn">Previous</button>
+        <button id="next-question-btn" class="quiz-btn">Next</button>
+    </div>
+</div>
+
+        <div id="result-container" class="result-container" style="display: none;">
+            <p id="final-score" class="final-score"></p>
+            <button id="restart-quiz-btn" class="quiz-btn">Ricomincia Quiz</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

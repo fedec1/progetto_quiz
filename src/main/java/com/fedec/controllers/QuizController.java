@@ -77,9 +77,18 @@ public class QuizController {
      
      @GetMapping("mista")
      public Domanda getDomandaMista() {
-    	 Domanda d = domandaService.generaDomandaMista();
     	 
-    	 return d;
+    	 boolean noError = false;
+    	 Domanda d = null;
+    	 while (!noError) {
+    		 try {
+    			 d = domandaService.generaDomandaMista();
+    			 noError = true;
+    		 } catch (Exception e) {
+                 System.err.println("Errore durante la generazione delle domande miste: " + e.getMessage());
+             }
+    	 }
+    	  return d;
      }
      
      @GetMapping("classifica")
