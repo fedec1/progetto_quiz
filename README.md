@@ -8,6 +8,13 @@ Sviluppo di un'applicazione web che mostri 15 domande a risposta multipla all'ut
 - Gianluca Fiore
 - Daniele Panzica
 
+## Tips Generali
+
+- Runnare i due script SQL presenti nella cartella DB per importare le due tabelle (nazioni e sessioni)
+- Fare inizialmente eseguire il FlagImporter per aggiornare i path delle immagini della bandiere
+- Nel caso il progetto scomparisse dalla boot dashboard, cliccare con il tasto destro su pom.xml, Maven, update project  
+
+
 ## Fasi di sviluppo
 
 ### Architettura del Database
@@ -146,7 +153,7 @@ Il ciclo for in seguito rimuove tutti gli eventuali spazi bianchi rimasti e le o
 
 ##### Classe Sessione  
 
-La classe è stata creata per rappresentare una sessione di gioco e mappare la relativa tabella nel DB. Sono stati implementati i getters and setters per i campi *username*, *type* e *score*.
+La classe è stata creata per rappresentare una sessione di gioco e mappare la relativa tabella nel DB. Sono stati implementati i getters and setters per i campi *username*, *type*, *score* e *difficulty*.
 
 ##### Classe Domanda
 
@@ -278,6 +285,8 @@ Il metodo **getDomandeMiste()** prende come parametro un intero n (indicante il 
 
 I metodi **generaQuizCapitali**, **generaQuizConfini** e **generaQuizBandiere** restituiscono invece una lista di domande spefifica.
 
+E' stato in seguito aggiunto un metodo **generaDomandaMista()** che non prende argomenti e genera una domanda casuale senza filtrarla per tipologia o difficoltà.
+
 ##### ClassificaService
 
 La classe ClassificaService implementa il metodo **GeneraClassifica** il quale prende come parametri la difficoltà (int) e la tipologia di quiz (String), e restituisce una lista di sessioni filtrate per i due parametri passati e ordinate per punteggio.
@@ -295,9 +304,10 @@ La classe **QuizController** è un controller REST che gestisce le richieste HTT
 - **public List<Sessione> getClassifica()** : restituisce una classifica di sessioni ordinate per score (GET)
 - **public List<Domanda> getDomandeConfini()** : restituisce un quiz di 15 domande sui confini (GET)
 - **public List<Domanda> getDomandeMiste()** : restituisce un quiz di 15 domande miste (GET)
+- **public Domanda getDomandaMista()** : restituisce una domanda casuale, non filtrata per tipologia o difficoltà (GET)
  
 
-In questi ultimi due metodi è stato inoltre aggiunto un semplice ciclo per ripetere la generazione delle domande nel caso non abbia successo.  
+In questi ultimi tre metodi è stato inoltre aggiunto un semplice ciclo per ripetere la generazione delle domande nel caso non abbia successo.  
 
 - **public ResponseEntity<Void> saveSession()** : prende come argomento una sessione in JSON e ne salva i valori di username, type e score nel DB (POST)
 
