@@ -162,4 +162,3 @@ document.getElementById('next-question-btn').addEventListener('click', () => {
 
 
 
-

@@ -48,6 +48,7 @@ E' stato in seguito creato una seconda tabella **sessions** in cui inserire i da
 - **username** : contiene l'username dell'utente della sessione di gioco
 - **score** : contiene il punteggio della sessione di gioco
 - **type** : identifica il tipo di quiz della sessione
+- **difficulty** : difficoltà del quiz in questione (1-3)
 
 ### Java Back-end
 
