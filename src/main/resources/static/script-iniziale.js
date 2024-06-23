@@ -4,6 +4,12 @@
  */
 
  // script-iniziale.js
+ 
+ document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('training').addEventListener('click', function() {
+        window.location.href = 'pagina-training/index.html';
+    });
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('quiz').addEventListener('click', function() {
