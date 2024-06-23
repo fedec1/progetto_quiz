@@ -1,60 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Progetto quiz game</title>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="Website about " >
+ <meta author="Gianluca Fiore" >
+ <link rel="stylesheet" href="styles-iniziale.css">
+
 </head>
+<!--Star of the body-->
 <body>
     <div class="container">
-        <h1>Quiz App</h1>
-        <div id="quiz-setup" class="quiz-setup">
-            <label for="quiz-type">Seleziona il tipo di quiz:</label>
-            <select id="quiz-type">
-                <option value="quizcapitale">Capitale</option>
-                <option value="quizbandiere">Bandiere</option>
-                <option value="quizconfini">Confini</option>
-                <option value="miste">Miste</option>
-            </select>
-            <label for="difficolta">Seleziona la difficoltà:</label>
-            <select id="difficolta">
-                <option value="1">Facile</option>
-                <option value="2">Medio</option>
-                <option value="3">Difficile</option>
-            </select>
-            <label for="username">Inserisci il tuo username:</label>
-            <input type="text" id="username" required>
-            <button id="start-quiz-btn" class="quiz-btn">Inizia Quiz</button>
-        </div>
-        <div id="question-container" class="question-container" style="display: none;">
-    <p id="question-text" class="question-text"></p>
-    <img id="flag-image" src="" alt="Flag" class="flag-image" style="display: none;"> <!-- Elemento per visualizzare l'immagine della bandiera -->
-    <div id="options-container" class="options-container"></div>
-    <div class="btn-container">
-        <button id="prev-question-btn" class="quiz-btn">Previous</button>
-        <button id="next-question-btn" class="quiz-btn">Next</button>
-    </div>
-</div>
+      <div class="brand-logo"></div>
+      <div class="brand-title">BENVENUTO SU *NOME QUIZ*</div>
+      <p id="inside-text">
+        Caro piccolo esploratore, preparati a viaggiare per il mondo senza lasciare la stanza! Oggi metterai alla prova la tua conoscenza in geografia attraverso 4 divertenti categorie.
+        Viaggia tra le capitali più  affascinanti, scopri le bandiere colorate che sventolano in ogni angolo del mondo e dimostra le tue abilità nel sapere quali paesi confinano tra loro.<br><br><br>
+      
+        Ogni domanda ti porterà in un'avventura diversa, facendoti esplorare dalle vette innevate
+        ai deserti infuocati, dalle grandi città alle isole remote. Mettiti comodo,
+        accendi la tua fantasia e preparati a rispondere a tante domande geografiche
+        che ti faranno scoprire nuovi luoghi e imparare curiosità interessanti!<br><br>
 
-        <div id="result-container" class="result-container" style="display: none;">
-            <p id="final-score" class="final-score"></p>
-            <button id="restart-quiz-btn" class="quiz-btn">Ricomincia Quiz</button>
-        </div>
+        Scegli tra la modalità training o quiz!
+      </p>
+      <div class="inputs">
+        <button id="training" type="submit">TRAINING</button>
+        <button id="quiz" type="submit">QUIZ</button>
+      </div>
     </div>
-    <script src="script.js"></script>
+    
+<!--End of the body-->
 </body>
+<script src="script-iniziale.js"></script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

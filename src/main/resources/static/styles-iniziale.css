@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #ecf0f3;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  place-items: center;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  position: relative;
+  width: 1000px; /* Increased box size */
+  height: 600px; /* Increased box size */
+  border-radius: 30px;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #ecf0f3;
+  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+}
+
+.brand-logo {
+  position: absolute; /* Position the logo absolutely */
+  top: 20px; /* Add space from the top */
+  left: 20px; /* Add space from the left */
+  height: 100px;
+  width: 100px;
+  background: url("assets/img/icon/logo-quiz.jpg") no-repeat center center;
+  background-size: cover; /* Ensure the image covers the entire circle */
+  border-radius: 50%;
+  box-sizing: border-box;
+  box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
+}
+
+.brand-title {
+  margin-top: 30px;
+  font-weight: 900;
+  font-size: 1.8rem;
+  color: #1DA1F2;
+  letter-spacing: 1px;
+  position: absolute; /* Position the title absolutely */
+  top: 20px; /* Add space from the top */
+  left: 50%; /* Center the title horizontally */
+  transform: translateX(-50%); /* Adjust for the title width */
+}
+
+#inside-text {
+  text-align: center;
+  margin-top: 120px; /* Add space from the top */
+  width: 90%; /* Adjust the width to ensure proper centering */
+}
+
+.inputs {
+  margin-top: auto; /* Add space from the top */
+  text-align: center; /* Center the buttons */
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  gap: 20px; /* Add space between buttons */
+  width: 100%; /* Ensure inputs take full width */
+}
+
+label, input, button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+label {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+label:nth-of-type(2) {
+  margin-top: 20px;
+}
+
+input::placeholder {
+  color: gray;
+}
+
+input {
+  background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  height: 50px;
+  font-size: 14px;
+  border-radius: 50px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+}
+
+button {
+  width: 400px; /* Reduced button width */
+  background: #1DA1F2;
+  height: 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+  transition: 0.5s;
+  font-size: 16px;
+}
+
+#training:hover {
+  box-shadow: none;
+  z-index: 1;
+  background: rgb(238, 181, 76);
+}
+
+#quiz:hover {
+  box-shadow: none;
+  z-index: 1;
+  background: rgb(250, 43, 43);
+}
+
+h1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
