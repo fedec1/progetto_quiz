@@ -208,3 +208,9 @@ h1 {
 .quiz-btn:hover {
   box-shadow: none;
 }
+
+/* Regola per cambiare il colore del bottone selezionato */
+button.selected {
+    background-color: orange; /* Colore arancione quando il bottone è selezionato */
+    color: white;
+}
