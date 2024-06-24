@@ -200,13 +200,13 @@ button:hover {
 }
 
 button.selected {
-  background-color: #2ecc71; /* Cambia questo colore con quello desiderato */
-  color: white; /* Cambia il colore del testo se necessario */
+  background-color: #2ecc71;
+  color: white;
 }
 
 .quiz-setup button.selected {
-    background-color: #4CAF50; /* Colore di sfondo quando selezionato */
-    color: white; /* Colore del testo quando selezionato */
+  background-color: #4CAF50;
+  color: white;
 }
 
 .result-container {
@@ -216,11 +216,11 @@ button.selected {
   justify-content: center;
   text-align: center;
   margin-top: 20px;
-  flex-grow: 1; /* Per estendere il contenitore fino in fondo */
+  flex-grow: 1;
 }
 
 #restart-quiz-btn {
-  margin-top: 12em; /* Spinge il pulsante verso il fondo del contenitore */
+  margin-top: 12em;
   font-size: 17px;
   border: none;
   border-radius: 20px;
@@ -230,6 +230,15 @@ button.selected {
 
 #restart-quiz-btn:hover {
   background-color: #2ecc71;
+}
+
+#button-container {
+  margin-top: 20px;
+}
+
+.input-group {
+  margin-top: auto;
+  width: 100%;
 }
 
 /* Media Queries */
@@ -281,17 +290,6 @@ button.selected {
   }
 
   button {
-    height: 50px;
-    font-size: 14px;
+    height: 45px;
   }
-
-  .quiz-btn {
-    height: 35px;
-    font-size: 14px;
-  }
-	
-	.quiz-setup button.selected {
-    background-color: #4CAF50; /* Colore di sfondo quando selezionato */
-    color: white; /* Colore del testo quando selezionato */
-}
 }

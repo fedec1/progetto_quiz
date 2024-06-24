@@ -223,9 +223,8 @@ button.selected {
   margin-top: 12em; /* Spinge il pulsante verso il fondo del contenitore */
   font-size: 17px;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   background-color: #1DA1F2;
-  color: #fff;
   cursor: pointer;
 }
 
