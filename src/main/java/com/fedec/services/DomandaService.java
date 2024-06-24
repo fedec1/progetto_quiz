@@ -105,26 +105,31 @@ public class DomandaService {
     public List<Domanda> generaDomandeMiste(int numeroDiDomande, int difficoltà) {
         List<Domanda> domande = new ArrayList<>();
         Random random = new Random();
-        boolean isnotcomplete= true;
         
-        while (isnotcomplete) {
-        	Domanda n= generaDomandaMista();
-        	boolean isexist= false;
-        	
-        	for (Domanda domanda : domande) {
-        		if (domanda.getDomanda().equals(n.getDomanda())) {
-        			isexist=true;
-        		}
-        	}
-        	if (!isexist) {
-        		
-        		
-        		
-        		
-        	}
-        	if (domande.size()==numeroDiDomande) {
-        		isnotcomplete=false;
-        	}
+        while (domande.size() < numeroDiDomande) {
+            int tipoDomanda = random.nextInt(3); // genera un numero casuale tra 0 e 2
+            Domanda nuovaDomanda = null;
+            
+            try {
+                switch (tipoDomanda) {
+                    case 0:
+                        nuovaDomanda = generaDomandaCapitale(difficoltà);
+                        break;
+                    case 1:
+                        nuovaDomanda = generaDomandaConfini(difficoltà);
+                        break;
+                    case 2:
+                        nuovaDomanda = generaDomandaBandiere(difficoltà);
+                        break;
+                }
+            } catch (IllegalStateException e) {
+                // ripete il ciclo se non è stato possibile generare una domanda (ad es. per mancanza di confini)
+                continue;
+            }
+
+            if (nuovaDomanda != null && !isDomandaDoppia(domande, nuovaDomanda)) {
+                domande.add(nuovaDomanda);
+            }
         }
         return domande;
     }
@@ -193,24 +198,14 @@ public class DomandaService {
     public List <Domanda> generaQuizBandiere(int numeroDiDomande, int difficoltà){
     	List<Domanda> domande = new ArrayList<>();
     	
-    	boolean isnotcomplete= true;
-    	
-    	while (isnotcomplete) {
-    		Domanda n= generaDomandaBandiere(difficoltà);
-    		boolean isexist= false;
-    		
-    		for (Domanda domanda : domande) {
-				if (domanda.getDomanda().equals(n.getDomanda())) {
-					isexist=true;
-				}
-			}
-    		if (!isexist) {
-    			domande.add(n);
-    		}
-    		if (domande.size()==numeroDiDomande) {
-				isnotcomplete=false;
-			}
-    	}
+    	while (domande.size() < numeroDiDomande) {
+            Domanda nuovaDomanda = null;
+            nuovaDomanda = generaDomandaBandiere(difficoltà);
+           
+             if (!isDomandaDoppia(domande, nuovaDomanda)) {
+                domande.add(nuovaDomanda);
+            }
+        }
     	
     	return domande;
     }
@@ -238,6 +233,17 @@ public class DomandaService {
     	}
     	return domande;
     }
+    
+    
+    private boolean isDomandaDoppia(List<Domanda> domande, Domanda nuovaDomanda) {
+        for (Domanda domanda : domande) {
+            if (domanda.getDomanda().equals(nuovaDomanda.getDomanda())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
 
 
