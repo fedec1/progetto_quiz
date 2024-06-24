@@ -255,7 +255,6 @@ tipoQuizButtons.forEach(button => {
         // Aggiungi la classe 'selected' solo al pulsante cliccato
         button.classList.add('selected');
 
-        // Aggiorna la variabile globale tipoQuiz
-        tipoQuiz = button.id; // Usa l'id del pulsante come tipoQuiz
+        
     });
 });
