@@ -173,24 +173,14 @@ public class DomandaService {
     	List<Domanda> domande = new ArrayList<>();
     	
     	
-    	boolean isnotcomplete= true;
-    	
-    	while (isnotcomplete) {
-    		Domanda n= generaDomandaCapitale(difficoltà);
-    		boolean isexist= false;
-    		
-    		for (Domanda domanda : domande) {
-				if (domanda.getDomanda().equals(n.getDomanda())) {
-					isexist=true;
-				}
-			}
-    		if (!isexist) {
-    			domande.add(n);
-    		}
-    		if (domande.size()==numeroDiDomande) {
-				isnotcomplete=false;
-			}
-    	}
+    	while (domande.size() < numeroDiDomande) {
+            Domanda nuovaDomanda = null;
+            nuovaDomanda = generaDomandaCapitale(difficoltà);
+           
+             if (!isDomandaDoppia(domande, nuovaDomanda)) {
+                domande.add(nuovaDomanda);
+            }
+        }
     	
     	return domande;
     }
@@ -213,31 +203,22 @@ public class DomandaService {
     public List <Domanda> generaQuizConfini(int numeroDiDomande, int difficoltà){
     	List<Domanda> domande = new ArrayList<>();
     	
-    	boolean isnotcomplete= true;
+    	while (domande.size() < numeroDiDomande) {
+            Domanda nuovaDomanda = null;
+            nuovaDomanda = generaDomandaConfini(difficoltà);
+           
+             if (!isDomandaDoppia(domande, nuovaDomanda)) {
+                domande.add(nuovaDomanda);
+            }
+        }
     	
-    	while (isnotcomplete) {
-    		Domanda n= generaDomandaConfini(difficoltà);
-    		boolean isexist= false;
-    		
-    		for (Domanda domanda : domande) {
-				if (domanda.getDomanda().equals(n.getDomanda())) {
-					isexist=true;
-				}
-			}
-    		if (!isexist) {
-    			domande.add(n);
-    		}
-    		if (domande.size()==numeroDiDomande) {
-				isnotcomplete=false;
-			}
-    	}
     	return domande;
     }
     
     
     private boolean isDomandaDoppia(List<Domanda> domande, Domanda nuovaDomanda) {
         for (Domanda domanda : domande) {
-            if (domanda.getDomanda().equals(nuovaDomanda.getDomanda())) {
+            if (domanda.equals(nuovaDomanda)) {
                 return true;
             }
         }
