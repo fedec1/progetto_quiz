@@ -91,7 +91,7 @@ public class DomandaService {
       
         while (opzioni.size() < 4) {
             Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
-            if (!opzioni.contains(nazioneRandom.getName()) && !confini.contains(nazioneRandom.getAlpha3Code())) {
+            if (!opzioni.contains(nazioneRandom.getName()) && !confini.contains(nazioneRandom.getAlpha3Code()) && nazioneRandom.getName()!= nazioneScelta.getName()) {
                 opzioni.add(nazioneRandom.getName());
             }
         }
@@ -192,7 +192,7 @@ public class DomandaService {
             Domanda nuovaDomanda = null;
             nuovaDomanda = generaDomandaBandiere(difficoltà);
            
-             if (!isDomandaDoppia(domande, nuovaDomanda)) {
+             if (!isDomandaDoppiaFlag(domande, nuovaDomanda)) {
                 domande.add(nuovaDomanda);
             }
         }
@@ -216,9 +216,18 @@ public class DomandaService {
     }
     
     
-    private boolean isDomandaDoppia(List<Domanda> domande, Domanda nuovaDomanda) {
+    private boolean isDomandaDoppiaFlag(List<Domanda> domande, Domanda nuovaDomanda) {
         for (Domanda domanda : domande) {
-            if (domanda.equals(nuovaDomanda)) {
+            if (domanda.getRispostaCorretta().equals(nuovaDomanda.getRispostaCorretta())) { //una domanda sulla bandiera per essere unica basta che non abbia la stessa risposta (1:1) (ma hanno tutte la stessa domanda)
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean isDomandaDoppia(List<Domanda> domande, Domanda nuovaDomanda) { //una domanda per essere unica basta che non abbia la stessa stringa di domanda (ma potrebbe avere la stessa risposta, vedi per nazioni confinanti)
+        for (Domanda domanda : domande) {
+            if (domanda.getDomanda().equals(nuovaDomanda.getDomanda())) {
                 return true;
             }
         }
