@@ -29,7 +29,7 @@ public class DomandaService {
         String regione = nazioneScelta.getRegion(); // get la regione della nazione scelta
         List<Nazione> nazioniStessaRegione = dao.findByRegion(regione); // get nazioni della stessa regione
 
-        String domanda = "Qual è la capitale di questo stato?\n " + nazioneScelta.getName();
+        String domanda = "Qual è la capitale di questo stato:\n" + nazioneScelta.getName();
         String rispostaCorretta = nazioneScelta.getCapital();
 
         List<String> opzioni = new ArrayList<>();
@@ -105,26 +105,35 @@ public class DomandaService {
     public List<Domanda> generaDomandeMiste(int numeroDiDomande, int difficoltà) {
         List<Domanda> domande = new ArrayList<>();
         Random random = new Random();
-        for (int i = 0; i < numeroDiDomande; i++) {
+        
+        while (domande.size() < numeroDiDomande) {
             int tipoDomanda = random.nextInt(3); // genera un numero casuale tra 0 e 2
+            Domanda nuovaDomanda = null;
+            
             try {
                 switch (tipoDomanda) {
                     case 0:
-                        domande.add(generaDomandaCapitale(difficoltà));
+                        nuovaDomanda = generaDomandaCapitale(difficoltà);
                         break;
                     case 1:
-                        domande.add(generaDomandaConfini(difficoltà));
+                        nuovaDomanda = generaDomandaConfini(difficoltà);
                         break;
                     case 2:
-                        domande.add(generaDomandaBandiere(difficoltà));
+                        nuovaDomanda = generaDomandaBandiere(difficoltà);
                         break;
                 }
             } catch (IllegalStateException e) {
-                i--; // ripete il ciclo se non è stato possibile generare una domanda (ad es. per mancanza di confini)
+                // ripete il ciclo se non è stato possibile generare una domanda (ad es. per mancanza di confini)
+                continue;
+            }
+
+            if (nuovaDomanda != null && !isDomandaDoppia(domande, nuovaDomanda)) {
+                domande.add(nuovaDomanda);
             }
         }
         return domande;
     }
+                
     
     @Transactional(readOnly = true)
     public Domanda generaDomandaMista() {
@@ -162,27 +171,60 @@ public class DomandaService {
     
     public List <Domanda> generaQuizCapitali(int numeroDiDomande, int difficoltà){
     	List<Domanda> domande = new ArrayList<>();
-    	for (int i = 0; i < numeroDiDomande; i++) {
-    		domande.add(generaDomandaCapitale(difficoltà));
-    	}
+    	
+    	
+    	while (domande.size() < numeroDiDomande) {
+            Domanda nuovaDomanda = null;
+            nuovaDomanda = generaDomandaCapitale(difficoltà);
+           
+             if (!isDomandaDoppia(domande, nuovaDomanda)) {
+                domande.add(nuovaDomanda);
+            }
+        }
+    	
     	return domande;
     }
     
     public List <Domanda> generaQuizBandiere(int numeroDiDomande, int difficoltà){
     	List<Domanda> domande = new ArrayList<>();
-    	for (int i = 0; i < numeroDiDomande; i++) {
-    		domande.add(generaDomandaBandiere(difficoltà));
-    	}
+    	
+    	while (domande.size() < numeroDiDomande) {
+            Domanda nuovaDomanda = null;
+            nuovaDomanda = generaDomandaBandiere(difficoltà);
+           
+             if (!isDomandaDoppia(domande, nuovaDomanda)) {
+                domande.add(nuovaDomanda);
+            }
+        }
+    	
     	return domande;
     }
     
     public List <Domanda> generaQuizConfini(int numeroDiDomande, int difficoltà){
     	List<Domanda> domande = new ArrayList<>();
-    	for (int i = 0; i < numeroDiDomande; i++) {
-    		domande.add(generaDomandaConfini(difficoltà));
-    	}
+    	
+    	while (domande.size() < numeroDiDomande) {
+            Domanda nuovaDomanda = null;
+            nuovaDomanda = generaDomandaConfini(difficoltà);
+           
+             if (!isDomandaDoppia(domande, nuovaDomanda)) {
+                domande.add(nuovaDomanda);
+            }
+        }
+    	
     	return domande;
     }
+    
+    
+    private boolean isDomandaDoppia(List<Domanda> domande, Domanda nuovaDomanda) {
+        for (Domanda domanda : domande) {
+            if (domanda.equals(nuovaDomanda)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
 
 

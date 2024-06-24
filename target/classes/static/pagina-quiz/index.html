@@ -8,9 +8,9 @@
 </head>
 <body>
     <div class="container">
-        <h1>*Nome Quiz*</h1>
         <div id="quiz-setup" class="quiz-setup">
-            <p>Seleziona il tipo di quiz:<p>
+        	<h1>*Nome Quiz*</h1>
+            <p>Seleziona il tipo di quiz:<p><br>
             <div id="button-container">
                 <button id="capitali">Capitali</button>
                 <button id="bandiere">Bandiere</button>
@@ -41,6 +41,10 @@
                 <button id="prev-question-btn" class="quiz-btn">Previous</button>
                 <button id="next-question-btn" class="quiz-btn">Next</button>
             </div>
+        </div>
+        <div id="leaderboard-container" style="display:none;">
+            <h2>Classifica</h2>
+            <ol id="leaderboard-list"></ol>
         </div>
         <div id="result-container" class="result-container" style="display: none;">
             <p id="final-score" class="final-score"></p>
