@@ -11,15 +11,18 @@ body {
   justify-content: center;
   place-items: center;
   overflow: hidden;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 23px;
 }
 
 .container {
   position: relative;
-  width: 1000px;
-  height: 600px;
+  width: 90%;
+  max-width: 1000px;
+  height: auto;
+  min-height: 600px;
   border-radius: 20px;
-  padding: 40px;
+  padding: 20px;
   box-sizing: border-box;
   background: #ecf0f3;
   box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
@@ -59,15 +62,15 @@ body {
   width: 100%;
   text-align: center;
   position: relative;
-  top: 45px; /* Adjust this value to move the paragraph further down */
+  top: 45px;
 }
 
 .container h1 {
   position: absolute;
-  top: 20px; /* Adjust this value as needed for vertical spacing */
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 2rem; /* Optional: Adjust font size if needed */
+  font-size: 2rem;
   color: #1DA1F2;
 }
 
@@ -105,7 +108,7 @@ input, select {
 
 button {
   background: #1DA1F2;
-  height: 60px; /* Increased height for better appearance */
+  height: 60px;
   border-radius: 20px;
   cursor: pointer;
   font-weight: 900;
@@ -116,31 +119,21 @@ button {
 
 button:hover {
   box-shadow: none;
-}
-
-h1 {
-  position: absolute;
-  top: 0;
-  left: 0;
+  background-color: #2ecc71;
 }
 
 .quiz-setup {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-grow: 1; /* Allow the quiz-setup to grow and take available space */
-  justify-content: space-between; /* Space out children elements to push the button to the bottom */
-}
-
-.quiz-setup p {
-  width: 100%;
-  text-align: center;
+  flex-grow: 1;
+  justify-content: space-between;
 }
 
 #button-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px; /* Adjusted gap for better spacing */
+  gap: 20px;
   width: 100%;
 }
 
@@ -150,18 +143,13 @@ h1 {
 
 .input-row {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
   width: 100%;
   margin-top: 20px;
 }
 
 .input-group {
-  display: flex;
-  flex-direction: column;
-  width: 48%;
-}
-
-#difficolta {
   width: 100%;
 }
 
@@ -169,6 +157,7 @@ h1 {
   font-size: 1.2rem;
   font-weight: 400;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .flag-image {
@@ -207,11 +196,103 @@ h1 {
 
 .quiz-btn:hover {
   box-shadow: none;
+  background-color: #2ecc71;
 }
 
-/* Regola per cambiare il colore del bottone selezionato */
 button.selected {
-    background-color: orange; /* Colore arancione quando il bottone è selezionato */
-    color: white;
+  background-color: #2ecc71; /* Cambia questo colore con quello desiderato */
+  color: white; /* Cambia il colore del testo se necessario */
 }
 
+.quiz-setup button.selected {
+    background-color: #4CAF50; /* Colore di sfondo quando selezionato */
+    color: white; /* Colore del testo quando selezionato */
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+  flex-grow: 1; /* Per estendere il contenitore fino in fondo */
+}
+
+#restart-quiz-btn {
+  margin-top: 12em; /* Spinge il pulsante verso il fondo del contenitore */
+  font-size: 17px;
+  border: none;
+  border-radius: 4px;
+  background-color: #1DA1F2;
+  color: #fff;
+  cursor: pointer;
+}
+
+#restart-quiz-btn:hover {
+  background-color: #2ecc71;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+    width: 95%;
+    min-height: auto;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .input-group {
+    width: 100%;
+  }
+
+  .btn-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  button {
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .container h1 {
+    font-size: 1.5rem;
+  }
+
+  .brand-logo {
+    height: 80px;
+    width: 80px;
+  }
+
+  .brand-title {
+    font-size: 1.2rem;
+  }
+
+  .question-text {
+    font-size: 1rem;
+  }
+
+  button {
+    height: 50px;
+    font-size: 14px;
+  }
+
+  .quiz-btn {
+    height: 35px;
+    font-size: 14px;
+  }
+	
+	.quiz-setup button.selected {
+    background-color: #4CAF50; /* Colore di sfondo quando selezionato */
+    color: white; /* Colore del testo quando selezionato */
+}
+}

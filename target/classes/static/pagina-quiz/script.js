@@ -6,16 +6,43 @@ let username = '';
 let tipoQuiz = '';
 let difficolta = '';
 
+
 // Funzione per avviare il quiz
 function avviaQuiz() {
     difficolta = parseInt(document.getElementById('difficolta').value); // Converti in intero
     username = document.getElementById('username').value;
 
-    if (!tipoQuiz) {
+    // Verifica se è stato selezionato un tipo di quiz
+    const selectedButton = document.querySelector('.quiz-setup button.selected');
+    if (!selectedButton) {
         alert("Seleziona un tipo di quiz");
         return;
     }
 
+    tipoQuiz = selectedButton.id; // Imposta tipoQuiz con l'id del pulsante selezionato
+	
+//in base alla selezione del pulsante va a modificare l'url per la chiamata API
+	switch (tipoQuiz) {
+	  case 'capitali':
+	    tipoQuiz='quizcapitale';
+	    break;
+	    
+	  case 'bandiere':
+		tipoQuiz='quizbandiere';
+		break;
+		
+	  case 'confini':
+	    tipoQuiz='quizconfini';
+	    break;
+	    
+	    case 'miste':
+	    tipoQuiz='miste';
+	    break;
+	    
+	  default:
+	    console.log(`id pulsante non gestito`);
+	}
+	
     // Chiamata API per ottenere le domande
     fetch(`/api/${tipoQuiz}?difficolta=${difficolta}`)
         .then(response => {
@@ -204,11 +231,7 @@ function aggiornaClassifica(classifica) {
 // Event listener per avviare il quiz al click del pulsante
 document.getElementById('start-quiz-btn').addEventListener('click', avviaQuiz);
 
-// Event listener per selezionare il tipo di quiz
-document.getElementById('capitali').addEventListener('click', () => tipoQuiz = 'quizcapitale');
-document.getElementById('bandiere').addEventListener('click', () => tipoQuiz = 'quizbandiere');
-document.getElementById('confini').addEventListener('click', () => tipoQuiz = 'quizconfini');
-document.getElementById('miste').addEventListener('click', () => tipoQuiz = 'miste');
+
 
 // Event listener per la navigazione tra le domande
 document.getElementById('prev-question-btn').addEventListener('click', () => {
@@ -220,4 +243,19 @@ document.getElementById('prev-question-btn').addEventListener('click', () => {
 
 document.getElementById('next-question-btn').addEventListener('click', () => {
     verificaRisposta();
+});
+
+// Event listener per selezionare il tipo di quiz
+const tipoQuizButtons = document.querySelectorAll('.quiz-setup button');
+tipoQuizButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Rimuovi la classe 'selected' da tutti i bottoni di modalità di quiz
+        tipoQuizButtons.forEach(btn => btn.classList.remove('selected'));
+        
+        // Aggiungi la classe 'selected' solo al pulsante cliccato
+        button.classList.add('selected');
+
+        // Aggiorna la variabile globale tipoQuiz
+        tipoQuiz = button.id; // Usa l'id del pulsante come tipoQuiz
+    });
 });
