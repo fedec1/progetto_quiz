@@ -93,8 +93,11 @@ function mostraDomandaCorrente() {
         }
     });
 
-    // Disabilita tutti i bottoni dopo la selezione
-    //buttons.forEach(btn => btn.disabled = true);
-
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('Home').addEventListener('click', function() {
+        window.location.href = '../index.html';
+    });
+});
 
