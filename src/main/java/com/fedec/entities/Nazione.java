@@ -2,6 +2,11 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,6 +46,9 @@ public class Nazione {
 	
 	@Column(name = "difficulty", nullable = false, length = 2)
 	private int difficulty;
+	
+	@Column(name = "translations", nullable = false, length = 89)
+	private String translations;
 
 	public int getId() {
 		return id;
@@ -124,6 +132,19 @@ public class Nazione {
         }
 
         return borders;
+    }
+
+	public String getTranslations() {
+		return translations;
+	}
+
+	public void setTranslations(String translations) {
+		this.translations = translations;
+	}
+	
+	public Map<String, String> deserializeTranslations(String json) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(json, new TypeReference<Map<String, String>>() {});
     }
 
 	

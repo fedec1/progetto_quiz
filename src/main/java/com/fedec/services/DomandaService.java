@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fedec.entities.Domanda;
 import com.fedec.entities.Nazione;
 import com.fedec.repos.NazioneDAO;
@@ -29,7 +30,13 @@ public class DomandaService {
         String regione = nazioneScelta.getRegion(); // get la regione della nazione scelta
         List<Nazione> nazioniStessaRegione = dao.findByRegion(regione); // get nazioni della stessa regione
 
-        String domanda = "Qual è la capitale di questo stato:\n" + nazioneScelta.getName();
+        String domanda = "";
+		try {
+			domanda = "Qual è la capitale di questo stato:\n" + nazioneScelta.deserializeTranslations(nazioneScelta.getTranslations()).get("it");
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         String rispostaCorretta = nazioneScelta.getCapital();
 
         List<String> opzioni = new ArrayList<>();
@@ -51,16 +58,32 @@ public class DomandaService {
     	Random random = new Random();
     	Nazione nazioneScelta = nazioni.get(random.nextInt(nazioni.size()));
     	String domanda = "A quale stato corrisponde questa bandiera?\n ";
-    	String rispostaCorretta = nazioneScelta.getName();
+    	String rispostaCorretta = "";
+		try {
+			rispostaCorretta = nazioneScelta.deserializeTranslations(nazioneScelta.getTranslations()).get("it");
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	String path = nazioneScelta.getBandiera();
     	
     	List<String> opzioni = new ArrayList<>();
         opzioni.add(rispostaCorretta);
         while (opzioni.size() < 4) {
             Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
-            if (!opzioni.contains(nazioneRandom.getName())) {
-                opzioni.add(nazioneRandom.getName());
-            }
+            try {
+				if (!opzioni.contains(nazioneRandom.deserializeTranslations(nazioneRandom.getTranslations()).get("it"))) {
+				    try {
+						opzioni.add(nazioneRandom.deserializeTranslations(nazioneRandom.getTranslations()).get("it"));
+					} catch (JsonProcessingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
         Collections.shuffle(opzioni);
 
@@ -82,7 +105,13 @@ public class DomandaService {
             confini = nazioneScelta.getBordersAsList(nazioneScelta.getBorders());
         }
 
-        String domanda = "Con quale nazione confina " + nazioneScelta.getName() + "?";
+        String domanda = "";
+		try {
+			domanda = "Con quale nazione confina " + nazioneScelta.deserializeTranslations(nazioneScelta.getTranslations()).get("it") + "?";
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         String rispostaCorretta = dao.getNazioneByAlpha3Code(confini.get(random.nextInt(confini.size()))).getName();
 
         List<String> opzioni = new ArrayList<>();
@@ -91,9 +120,19 @@ public class DomandaService {
       
         while (opzioni.size() < 4) {
             Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
-            if (!opzioni.contains(nazioneRandom.getName()) && !confini.contains(nazioneRandom.getAlpha3Code()) && nazioneRandom.getName()!= nazioneScelta.getName()) {
-                opzioni.add(nazioneRandom.getName());
-            }
+            try {
+				if (!opzioni.contains(nazioneRandom.deserializeTranslations(nazioneRandom.getTranslations()).get("it")) && !confini.contains(nazioneRandom.getAlpha3Code()) && nazioneRandom.getName()!= nazioneScelta.getName()) {
+				    try {
+						opzioni.add(nazioneRandom.deserializeTranslations(nazioneRandom.getTranslations()).get("it"));
+					} catch (JsonProcessingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
 
         Collections.shuffle(opzioni);
@@ -218,7 +257,7 @@ public class DomandaService {
     
     private boolean isDomandaDoppiaFlag(List<Domanda> domande, Domanda nuovaDomanda) {
         for (Domanda domanda : domande) {
-            if (domanda.getRispostaCorretta().equals(nuovaDomanda.getRispostaCorretta())) { //una domanda sulla bandiera per essere unica basta che non abbia la stessa risposta (1:1) (ma hanno tutte la stessa domanda)
+            if (domanda.getRispostaCorretta().equals(nuovaDomanda.getRispostaCorretta())) { //una domanda sulla bandiera per essere unica basta che non abbia la stessa risposta (1:1) (ma hanno tutte la stessa stringa di  domanda)
                 return true;
             }
         }
