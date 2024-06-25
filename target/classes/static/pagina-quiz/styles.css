@@ -160,6 +160,9 @@ button {
   box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
   transition: 0.5s;
   margin: 10px 5px;
+  font-family: 'Luckiest Guy';
+  letter-spacing: 5px;
+  font-size: 20px;
 }
 
 button:hover {
