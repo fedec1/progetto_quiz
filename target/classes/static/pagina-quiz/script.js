@@ -258,3 +258,9 @@ tipoQuizButtons.forEach(button => {
         
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('Home').addEventListener('click', function() {
+        window.location.href = '../index.html';
+    });
+});

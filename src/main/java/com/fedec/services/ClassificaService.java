@@ -16,7 +16,7 @@ public class ClassificaService {
 	
 	public List<Sessione> generaClassifica(int difficolta, String type){
 		
-		return dao.findByTypeAndDifficultyOrderByScoreDesc(type, difficolta);
+		return dao.findTop10ByTypeAndDifficultyOrderByScoreDesc(type, difficolta);
 		
 	}
 
