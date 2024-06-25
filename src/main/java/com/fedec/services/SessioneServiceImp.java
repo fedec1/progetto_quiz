@@ -32,7 +32,7 @@ public class SessioneServiceImp implements SessioneService {
 	@Override
 	public List<Sessione> findByTypeAndDifficulty(String type, int difficolta) {
 		// TODO Auto-generated method stub
-		return dao.findByTypeAndDifficultyOrderByScoreDesc(type, difficolta);
+		return dao.findTop10ByTypeAndDifficultyOrderByScoreDesc(type, difficolta);
 	}
 
 	

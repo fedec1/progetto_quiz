@@ -8,6 +8,6 @@ import com.fedec.entities.Sessione;
 
 public interface SessioneDAO extends JpaRepository<Sessione, Integer> {
 	
-	List<Sessione> findByTypeAndDifficultyOrderByScoreDesc(String type, int difficolta);
+	List<Sessione> findTop10ByTypeAndDifficultyOrderByScoreDesc(String type, int difficolta);
 
 }
