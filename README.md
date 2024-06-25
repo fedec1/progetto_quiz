@@ -152,6 +152,8 @@ for (String border : borderArray) {
 
 Il ciclo for in seguito rimuove tutti gli eventuali spazi bianchi rimasti e le occorrenze dei doppi apici, in modo da ritornare un alpha3code pulito.
 
+Sono anche stati implementati in seguito i getter e setter per le traduzioni ed è stato aggiunto il metodo **deserializeTranslations** per restituire un oggetto di tipo Map contenente le traduzioni della nazione in altre lingue.
+
 ##### Classe Sessione  
 
 La classe è stata creata per rappresentare una sessione di gioco e mappare la relativa tabella nel DB. Sono stati implementati i getters and setters per i campi *username*, *type*, *score* e *difficulty*.
@@ -250,7 +252,7 @@ String domanda = "Qual è la capitale di questo stato?\n " + nazioneScelta.getNa
 String rispostaCorretta = nazioneScelta.getCapital();
 ```
 
-Successivamente viene scritta la domanda, concatenando una stringa costante con il nome della nazione scelta.  
+Successivamente viene scritta la domanda, concatenando una stringa costante con il nome della nazione scelta (successivamente tradotto con il metodo *getTranslations()*).  
 La stringa **rispostaCorretta** contiene invece la capitale della nazione scelta.
 
 ```java
@@ -287,6 +289,8 @@ Il metodo **getDomandeMiste()** prende come parametro un intero n (indicante il 
 I metodi **generaQuizCapitali**, **generaQuizConfini** e **generaQuizBandiere** restituiscono invece una lista di domande spefifica.
 
 E' stato in seguito aggiunto un metodo **generaDomandaMista()** che non prende argomenti e genera una domanda casuale senza filtrarla per tipologia o difficoltà.
+
+I metodi **isDomandaDoppia** e **isDomandaDoppiaFlag** sono metodi accessori aggiunti per controllare che non vengano generate domande uguali nei quiz.
 
 ##### ClassificaService
 
