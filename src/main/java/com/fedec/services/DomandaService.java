@@ -71,14 +71,19 @@ public class DomandaService {
         opzioni.add(rispostaCorretta);
         while (opzioni.size() < 4) {
             Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
-            if (!opzioni.contains(nazioneRandom.getName())) {
-                try {
-					opzioni.add(nazioneRandom.deserializeTranslations(nazioneRandom.getTranslations()).get("it"));
-				} catch (JsonProcessingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+            try {
+				if (!opzioni.contains(nazioneRandom.deserializeTranslations(nazioneRandom.getTranslations()).get("it"))) {
+				    try {
+						opzioni.add(nazioneRandom.deserializeTranslations(nazioneRandom.getTranslations()).get("it"));
+					} catch (JsonProcessingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-            }
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
         Collections.shuffle(opzioni);
 
@@ -115,14 +120,19 @@ public class DomandaService {
       
         while (opzioni.size() < 4) {
             Nazione nazioneRandom = nazioni.get(random.nextInt(nazioni.size()));
-            if (!opzioni.contains(nazioneRandom.getName()) && !confini.contains(nazioneRandom.getAlpha3Code()) && nazioneRandom.getName()!= nazioneScelta.getName()) {
-                try {
-					opzioni.add(nazioneRandom.deserializeTranslations(nazioneRandom.getTranslations()).get("it"));
-				} catch (JsonProcessingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+            try {
+				if (!opzioni.contains(nazioneRandom.deserializeTranslations(nazioneRandom.getTranslations()).get("it")) && !confini.contains(nazioneRandom.getAlpha3Code()) && nazioneRandom.getName()!= nazioneScelta.getName()) {
+				    try {
+						opzioni.add(nazioneRandom.deserializeTranslations(nazioneRandom.getTranslations()).get("it"));
+					} catch (JsonProcessingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-            }
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
 
         Collections.shuffle(opzioni);
