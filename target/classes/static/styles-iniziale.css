@@ -52,7 +52,7 @@ body  {
   font-weight: 900;
   font-size: 1.8rem;
   color: #1DA1F2;
-  letter-spacing: 1px;
+  letter-spacing: 3px;
   position: absolute; /* Position the title absolutely */
   top: 20px; /* Add space from the top */
   left: 50%; /* Center the title horizontally */

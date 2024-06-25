@@ -31,6 +31,8 @@ body {
   align-items: center;
   position: relative;
   width: 100%; /* Imposta la larghezza a 100% */
+  font-family: 'Luckiest Guy';
+  letter-spacing: 2px;
 }
 
 .header h1 {
@@ -39,6 +41,7 @@ body {
   color: #1DA1F2;
   flex-grow: 1;
   text-align: center;
+  
 }
 
 #Home {
@@ -64,6 +67,8 @@ body {
 #Home span {
   font-size: 12px;
   margin-top: 4px;
+  font-family: 'Luckiest Guy';
+  letter-spacing: 2.5px;
 }
 
 #Home:hover {
@@ -198,6 +203,11 @@ button:hover {
   font-weight: 400;
   margin-bottom: 20px;
   text-align: center;
+  font-family: 'Luckiest Guy';
+}
+
+#option-containers{
+	font-family: 'Luckiest Guy';
 }
 
 .flag-image {
