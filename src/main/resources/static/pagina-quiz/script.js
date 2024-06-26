@@ -298,15 +298,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 
-    // Chiudi il modale quando l'utente clicca sulla "X"
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // Chiudi il modale quando l'utente clicca fuori dal modale
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
 });

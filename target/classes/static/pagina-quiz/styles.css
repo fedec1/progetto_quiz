@@ -121,7 +121,7 @@ body {
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 2rem;
+  font-size: 3rem;
   color: #1DA1F2;
 }
 
@@ -184,6 +184,11 @@ button:hover {
   justify-content: space-between;
 }
 
+.quiz-setup p {
+	font-size: 30px;
+	margin-bottom: 2px;;
+}
+
 #button-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -224,6 +229,7 @@ button:hover {
   margin-bottom: 20px;
   text-align: center;
   font-family: 'Luckiest Guy';
+  padding-top: 30px;
 }
 
 #option-containers{

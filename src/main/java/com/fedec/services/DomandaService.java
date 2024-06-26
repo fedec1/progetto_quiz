@@ -107,7 +107,7 @@ public class DomandaService {
 
         String domanda = "";
 		try {
-			domanda = "Con quale nazione confina " + nazioneScelta.deserializeTranslations(nazioneScelta.getTranslations()).get("it") + "?";
+			domanda = "Con quale nazione confina questo stato ? " + nazioneScelta.deserializeTranslations(nazioneScelta.getTranslations()).get("it");
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
