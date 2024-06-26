@@ -38,9 +38,9 @@ body  {
   position: absolute; /* Position the logo absolutely */
   top: 20px; /* Add space from the top */
   left: 20px; /* Add space from the left */
-  height: 100px;
-  width: 100px;
-  background: url("assets/img/icon/logo-quiz.jpg") no-repeat center center;
+  height: 110px;
+  width: 110px;
+  background: url("assets/img/icon/logo.png") no-repeat center center;
   background-size: cover; /* Ensure the image covers the entire circle */
   border-radius: 50%;
   box-sizing: border-box;

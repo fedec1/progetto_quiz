@@ -12,6 +12,7 @@ body {
   overflow: hidden;
   font-family: 'Luckiest Guy';
   font-size: 20px;
+  background-color: #3cd1cf;
 }
 
 .container {
@@ -42,6 +43,20 @@ body {
   font-size: 40px;
   color: #1DA1F2;
 }
+
+.brand-logo {
+  position: absolute; /* Position the logo absolutely */
+  top: 20px; /* Add space from the top */
+  left: 20px; /* Add space from the left */
+  height: 100px;
+  width: 100px;
+  background: url("assets/img/icon/logo.png") no-repeat center center;
+  background-size: cover; /* Ensure the image covers the entire circle */
+  border-radius: 50%;
+  box-sizing: border-box;
+  box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
+}
+
 
 #Home {
   display: flex;

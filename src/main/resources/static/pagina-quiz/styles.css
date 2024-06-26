@@ -8,6 +8,10 @@ body {
   justify-content: center;
   font-family: 'Luckiest Guy';
   font-size: 21px;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #3cd1cf;
 }
 
 .container {
@@ -44,6 +48,19 @@ body {
   
 }
 
+.brand-logo {
+  position: absolute; /* Position the logo absolutely */
+  top: 20px; /* Add space from the top */
+  left: 20px; /* Add space from the left */
+  height: 110px;
+  width: 110px;
+  background: url("assets/img/icon/logo.png") no-repeat center center;
+  background-size: cover; /* Ensure the image covers the entire circle */
+  border-radius: 50%;
+  box-sizing: border-box;
+  box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
+}
+
 #Home {
   background: #1DA1F2;
   width: 65px;
@@ -74,17 +91,6 @@ body {
 #Home:hover {
   box-shadow: none;
   background-color: #2ecc71;
-}
-
-.brand-logo {
-  height: 100px;
-  width: 100px;
-  background: url("assets/img/icon/logo-quiz.jpg") no-repeat center center;
-  background-size: cover;
-  margin: auto;
-  border-radius: 50%;
-  box-sizing: border-box;
-  box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
 }
 
 .brand-title {
@@ -195,6 +201,17 @@ button:hover {
   gap: 10px;
   width: 100%;
   margin-top: 20px;
+  font-family: "Luckiest Guy";
+}
+
+#difficolta{
+	font-family:"Luckiest Guy";
+	letter-spacing: 2px;
+}
+
+#username{
+	font-family:"Luckiest Guy";
+	letter-spacing: 2px;
 }
 
 .input-group {
@@ -202,7 +219,7 @@ button:hover {
 }
 
 .question-text {
-  font-size: 1.2rem;
+  font-size: 1.7rem;
   font-weight: 400;
   margin-bottom: 20px;
   text-align: center;
@@ -214,8 +231,8 @@ button:hover {
 }
 
 .flag-image {
-  width: 100px;
-  height: auto;
+  width: 200px;
+  height: 200px;
   margin: 20px auto;
 }
 
@@ -346,4 +363,5 @@ button.selected {
     background-color: #4CAF50;
     color: white;
   }
+  
 }

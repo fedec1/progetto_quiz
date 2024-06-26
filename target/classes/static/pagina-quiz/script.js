@@ -264,3 +264,49 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = '../index.html';
     });
 });
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    var modal = document.getElementById("myModal");
+    var modalDescription = document.getElementById("modal-description");
+    var span = document.getElementsByClassName("close")[0];
+
+    // Ottieni tutti i bottoni
+    var buttons = document.querySelectorAll('#button-container .quiz-btn');
+
+    // Aggiungi un event listener a ciascun bottone
+    buttons.forEach(function(button) {
+        button.onclick = function() {
+            var description = '';
+            switch(button.id) {
+                case 'capitali':
+                    description = 'Quiz sulle capitali dei paesi del mondo.';
+                    break;
+                case 'bandiere':
+                    description = 'Quiz sulle bandiere dei paesi del mondo.';
+                    break;
+                case 'confini':
+                    description = 'Quiz sui confini dei paesi del mondo.';
+                    break;
+                case 'miste':
+                    description = 'Quiz misto su capitali, bandiere e confini.';
+                    break;
+                default:
+                    description = 'Descrizione non disponibile.';
+            }
+            modalDescription.innerText = description;
+            modal.style.display = "block";
+        }
+    });
+
+    // Chiudi il modale quando l'utente clicca sulla "X"
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Chiudi il modale quando l'utente clicca fuori dal modale
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+});
