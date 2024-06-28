@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('assets/img/background-iniziale.svg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #3cd1cf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Luckiest Guy', cursive;
+}
+
+.credits-container {
+  position: relative;
+  width: 800px;
+  height: 550px;
+  padding: 40px;
+  border-radius: 30px;
+  background: #ecf0f3;
+  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+  text-align: center;
+  font-family: 'Luckiest Guy', cursive;
+}
+
+
+h1 {
+  margin-top: 0;
+  font-size: 2.5rem;
+  color: #1DA1F2;
+  letter-spacing: 3px;
+}
+
+p {
+  font-size: 1.3rem;
+  margin: 20px 0;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+  font-family: 'Luckiest Guy', cursive;
+}
+
+button {
+  width: 100%;
+  background: #1DA1F2;
+  height: 50px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+  transition: 0.5s;
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  font-family: 'Luckiest Guy', cursive; 
+}
+
+button:hover {
+  box-shadow: none;
+}
+
+#home-button {
+  margin-top: 30px;
+}
+
+.team-member:hover {
+  background-color: #2ecc71;
+}
+
+#home-button:hover{
+	  background-color: #2ecc71;
+}
