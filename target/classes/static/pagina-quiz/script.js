@@ -18,7 +18,8 @@ let checkCampiRequiredAvviaQuiz = () => {
     if (!selectedButton) {
         alert("Seleziona un tipo di quiz");
         compiledFields = false;
-    } else if (!compiledUsername) {
+    }
+    if (selectedButton && !compiledUsername.value) {
         alert("Inserire l'username");
         compiledFields = false;
     }
@@ -31,7 +32,7 @@ function avviaQuiz() {
     difficolta = parseInt(document.getElementById('difficolta').value); // Converti in intero
     username = document.getElementById('username').value;
 
-    let bCompiledRequiredFields = checkCampiRequiredAvviaQuiz;
+    let bCompiledRequiredFields = checkCampiRequiredAvviaQuiz();
 
     if (bCompiledRequiredFields) {
         const selectedButton = document.querySelector('.quiz-setup button.selected');
@@ -199,16 +200,16 @@ function salvaSessione(username, tipoQuiz, score, difficolta) {
         },
         body: JSON.stringify(sessione)
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Errore nel salvataggio della sessione');
-            }
-            console.log('Sessione salvata con successo');
-        })
-        .catch(error => {
-            console.error('Errore:', error);
-            throw error;
-        });
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Errore nel salvataggio della sessione');
+        }
+        console.log('Sessione salvata con successo');
+    })
+    .catch(error => {
+        console.error('Errore:', error);
+        throw error;
+    });
 }
 
 // Funzione per richiedere la classifica
@@ -268,16 +269,16 @@ tipoQuizButtons.forEach(button => {
     button.addEventListener('click', () => {
         // Rimuovi la classe 'selected' da tutti i bottoni di modalità di quiz
         tipoQuizButtons.forEach(btn => btn.classList.remove('selected'));
-
+        
         // Aggiungi la classe 'selected' solo al pulsante cliccato
         button.classList.add('selected');
 
-
+        
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('Home').addEventListener('click', function () {
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('Home').addEventListener('click', function() {
         window.location.href = '../index.html';
     });
 });

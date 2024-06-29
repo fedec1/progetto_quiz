@@ -6,56 +6,74 @@ let username = '';
 let tipoQuiz = '';
 let difficolta = '';
 
+/**
+ * check if required filed for start quiz are compiled
+ * @returns {boolean} if there is a required field doesnt compiled, return false
+ */
+let checkCampiRequiredAvviaQuiz = () => {
+    let compiledFields = true;
+    // Verifica se è stato selezionato un tipo di quiz
+    const selectedButton = document.querySelector('.quiz-setup button.selected');
+    const compiledUsername = document.querySelector('.quiz-setup input#username');
+    if (!selectedButton) {
+        alert("Seleziona un tipo di quiz");
+        compiledFields = false;
+    }
+    if (selectedButton && !compiledUsername.value) {
+        alert("Inserire l'username");
+        compiledFields = false;
+    }
+    return compiledFields;
+};
+
 
 // Funzione per avviare il quiz
 function avviaQuiz() {
     difficolta = parseInt(document.getElementById('difficolta').value); // Converti in intero
     username = document.getElementById('username').value;
 
-    // Verifica se è stato selezionato un tipo di quiz
-    const selectedButton = document.querySelector('.quiz-setup button.selected');
-    if (!selectedButton) {
-        alert("Seleziona un tipo di quiz");
-        return;
-    }
+    let bCompiledRequiredFields = checkCampiRequiredAvviaQuiz();
 
-    tipoQuiz = selectedButton.id; // Imposta tipoQuiz con l'id del pulsante selezionato
-	
-//in base alla selezione del pulsante va a modificare l'url per la chiamata API
-	switch (tipoQuiz) {
-	  case 'capitali':
-	    tipoQuiz='quizcapitale';
-	    break;
-	    
-	  case 'bandiere':
-		tipoQuiz='quizbandiere';
-		break;
-		
-	  case 'confini':
-	    tipoQuiz='quizconfini';
-	    break;
-	    
-	    case 'miste':
-	    tipoQuiz='miste';
-	    break;
-	    
-	  default:
-	    console.log(`id pulsante non gestito`);
-	}
-	
-    // Chiamata API per ottenere le domande
-    fetch(`/api/${tipoQuiz}?difficolta=${difficolta}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Errore nella risposta del server');
-            }
-            return response.json();
-        })
-        .then(data => {
-            quizData = data; // Salva le domande ricevute
-            mostraDomandaCorrente();
-        })
-        .catch(error => console.error('Errore:', error));
+    if (bCompiledRequiredFields) {
+        const selectedButton = document.querySelector('.quiz-setup button.selected');
+        tipoQuiz = selectedButton.id; // Imposta tipoQuiz con l'id del pulsante selezionato
+
+        //in base alla selezione del pulsante va a modificare l'url per la chiamata API
+        switch (tipoQuiz) {
+            case 'capitali':
+                tipoQuiz = 'quizcapitale';
+                break;
+
+            case 'bandiere':
+                tipoQuiz = 'quizbandiere';
+                break;
+
+            case 'confini':
+                tipoQuiz = 'quizconfini';
+                break;
+
+            case 'miste':
+                tipoQuiz = 'miste';
+                break;
+
+            default:
+                console.log(`id pulsante non gestito`);
+        }
+
+        // Chiamata API per ottenere le domande
+        fetch(`/api/${tipoQuiz}?difficolta=${difficolta}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Errore nella risposta del server');
+                }
+                return response.json();
+            })
+            .then(data => {
+                quizData = data; // Salva le domande ricevute
+                mostraDomandaCorrente();
+            })
+            .catch(error => console.error('Errore:', error));
+    }
 }
 
 // Funzione per mostrare la domanda corrente
