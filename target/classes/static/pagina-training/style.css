@@ -148,7 +148,7 @@ button {
   margin: 10px 5px;
   font-family: 'Luckiest Guy';
   letter-spacing: 5px;
-  font-size: 20px;
+  font-size: 27px;
 }
 
 button:hover {
@@ -197,8 +197,8 @@ button:hover {
 }
 
 .flag-image {
-  width: 100px;
-  height: auto;
+  width: 200px;
+  height: 200px;
   margin: 20px auto;
 }
 

@@ -17,3 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('credits').addEventListener('click', function() {
+        window.location.href = 'pagina-credits/index.html';
+    });
+});
