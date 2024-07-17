@@ -27,6 +27,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 1;
 }
 
 .header {
@@ -92,6 +93,23 @@ body {
   background-color: #2ecc71;
 }
 
+/* Aggiungi questo CSS al tuo file esistente */
+#timer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #1DA1F2;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+
 .brand-title {
   margin-top: 20px;
   font-weight: 900;
@@ -106,6 +124,10 @@ body {
   flex-direction: column;
   flex-grow: 1;
   justify-content: flex-start;
+}
+
+.score-container{
+	text-align: center;
 }
 
 .quiz-setup p {
@@ -185,8 +207,8 @@ button:hover {
 
 .quiz-setup p {
 	font-size: 30px;
-	margin-bottom: 2px;;
 }
+
 
 #button-container {
   display: grid;
@@ -228,17 +250,24 @@ button:hover {
   margin-bottom: 20px;
   text-align: center;
   font-family: 'Luckiest Guy';
-  padding-top: 30px;
 }
+
+.response-counts {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
 
 #option-containers{
 	font-family: 'Luckiest Guy';
 }
 
 .flag-image {
-  width: 200px;
-  height: 200px;
-  margin: 20px auto;
+  width: 150px;
+  height: 100px;
+  margin: 5px auto;
 }
 
 .options-container {
