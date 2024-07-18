@@ -10,7 +10,7 @@ Sviluppo di un'applicazione web che mostri 15 domande a risposta multipla all'ut
 
 ## Tips Generali
 
-- Runnare i due script SQL presenti nella cartella DB per importare le due tabelle (nazioni e sessioni)
+- Se ci sono problemi con la lettura dello schema.sql, provare a cancellare il file fileDb.mv.db nella cartella data
 - Fare inizialmente eseguire il FlagImporter per aggiornare i path delle immagini della bandiere
 - Nel caso il progetto scomparisse dalla boot dashboard, cliccare con il tasto destro su pom.xml, Maven, update project  
 
