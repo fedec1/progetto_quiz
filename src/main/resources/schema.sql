@@ -28,7 +28,6 @@ CREATE TABLE sessions (
 	difficulty INT not null
 );
 
-
 INSERT INTO `nazioni` VALUES (1,'AF','AFG','IRN,PAK,TKM,UZB,TJK,CHN','Kabul','Afghan','.\\bandiere-nazioni\\AF.svg','Afghanistan','افغانستان','004','38928341','Asia','Southern Asia','AFG',
 2,'{}'); 
 INSERT INTO `nazioni` VALUES (2,'AL','ALB','MNE,GRC,MKD,UNK','Tirana','Albanian','.\\bandiere-nazioni\\AL.svg','Albania','Shqipëria','008','2837743','Europe','Southern Europe','ALB',
@@ -540,4 +539,5 @@ UPDATE nazioni SET translations = '{"br": "Vietnã", "cs": "Vietnam", "de": "Vie
 UPDATE nazioni SET translations = '{"br": "Iêmen", "cs": "Jemen", "de": "Jemen", "es": "Yemen", "fa": "یمن", "fr": "Yémen", "hr": "Jemen", "hu": "Jemen", "it": "Yemen", "ja": "イエメン", "nl": "Jemen", "pl": "Jemen", "pt": "Iémen", "ru": "Йемен", "se": "Jemen", "zh": "也门共和国"}' WHERE id = 168;
 UPDATE nazioni SET translations = '{"br": "Zâmbia", "cs": "Zambie", "de": "Sambia", "es": "Zambia", "fa": "زامبیا", "fr": "Zambie", "hr": "Zambija", "hu": "Zambia", "it": "Zambia", "ja": "ザンビア", "nl": "Zambia", "pl": "Zambia", "pt": "Zâmbia", "ru": "Замбия", "se": "Zambia", "zh": "赞比亚共和国"}' WHERE id = 169;
 UPDATE nazioni SET translations = '{"br": "Zimbabwe", "cs": "Zimbabwe", "de": "Simbabwe", "es": "Zimbabue", "fa": "زیمباوه", "fr": "Zimbabwe", "hr": "Zimbabve", "hu": "Zimbabwe", "it": "Zimbabwe", "ja": "ジンバブエ", "nl": "Zimbabwe", "pl": "Zimbabwe", "pt": "Zimbabué", "ru": "Зимбабве", "se": "Zimbabwe", "zh": "津巴布韦共和国"}' WHERE id = 170;
+
 

@@ -1,11 +1,12 @@
 let pulsante = document.getElementById('next-question-btn');
 
 let quizData;
+let correctCount = 0;
+let incorrectCount = 0;
 
 chiamataMista();
 
-function chiamataMista (){
-	
+function chiamataMista() {
 	// Chiamata API per ottenere le domande
 	fetch(`/api/mista`)
 		.then(response => {
@@ -19,7 +20,6 @@ function chiamataMista (){
 			mostraDomandaCorrente();
 		})
 		.catch(error => console.error('Errore:', error));
-	
 }
 
 pulsante.onclick = () => chiamataMista();
@@ -48,56 +48,63 @@ function mostraDomandaCorrente() {
 	} else {
 		flagImage.style.display = 'none'; // Nasconde l'immagine della bandiera se il percorso non è definito
 	}
-	
+
 	// Pulisce le opzioni precedenti
-    optionsContainer.innerHTML = '';
+	optionsContainer.innerHTML = '';
 
-    // Mostra le opzioni di risposta
-    domandaCorrente.opzioni.forEach(opzione => {
-        const button = document.createElement('button');
-        button.textContent = opzione;
-        button.onclick = () => selezionaRisposta(button);
-        optionsContainer.appendChild(button);
-    });
-    
+	// Mostra le opzioni di risposta
+	domandaCorrente.opzioni.forEach(opzione => {
+		const button = document.createElement('button');
+		button.textContent = opzione;
+		button.onclick = () => selezionaRisposta(button);
+		optionsContainer.appendChild(button);
+	});
+}
 
-}    
+// Funzione per gestire la selezione della risposta
+function selezionaRisposta(button) {
+	const optionsContainer = document.getElementById('options-container');
 
-    // Funzione per gestire la selezione della risposta
-	function selezionaRisposta(button) {
-    const optionsContainer = document.getElementById('options-container');
+	// Rimuovi la classe "selected" da tutti i bottoni
+	const buttons = optionsContainer.querySelectorAll('button');
+	buttons.forEach(btn => btn.classList.remove('selected'));
 
-    // Rimuovi la classe "selected" da tutti i bottoni
-    const buttons = optionsContainer.querySelectorAll('button');
-    buttons.forEach(btn => btn.classList.remove('selected'));
+	// Aggiungi la classe "selected" al bottone cliccato
+	button.classList.add('selected');
 
-    // Aggiungi la classe "selected" al bottone cliccato
-    button.classList.add('selected');
+	// Abilita il pulsante "Next" per andare alla domanda successiva
+	document.getElementById('next-question-btn').disabled = false;
 
-    // Abilita il pulsante "Next" per andare alla domanda successiva
-    document.getElementById('next-question-btn').disabled = false;
-    
-     // Verifica se la risposta selezionata è corretta
-    const isCorrect = (button.textContent === quizData.rispostaCorretta);
-    button.style.backgroundColor = isCorrect ? 'green' : 'red';
-    button.style.color = 'black';
+	// Verifica se la risposta selezionata è corretta
+	const isCorrect = (button.textContent === quizData.rispostaCorretta);
+	button.style.backgroundColor = isCorrect ? 'green' : 'red';
+	button.style.color = 'black';
 
-    // Mostra i colori per tutte le risposte
-    buttons.forEach((btn, idx) => {
-        if (btn.textContent === quizData.rispostaCorretta) {
-            btn.style.backgroundColor = 'green';
-            btn.style.color = 'black';
-        } else {
-            btn.style.backgroundColor = 'red';
-            btn.style.color = 'black';
-        }
-    });
+	// Mostra i colori per tutte le risposte
+	buttons.forEach((btn, idx) => {
+		if (btn.textContent === quizData.rispostaCorretta) {
+			btn.style.backgroundColor = 'green';
+			btn.style.color = 'black';
+		} else {
+			btn.style.backgroundColor = 'red';
+			btn.style.color = 'black';
+		}
+	});
 
+	// Aggiorna il conteggio delle risposte
+	if (isCorrect) {
+		correctCount++;
+	} else {
+		incorrectCount++;
+	}
+
+	// Aggiorna la visualizzazione del conteggio delle risposte
+	document.getElementById('correct-count').textContent = `Corrette: ${correctCount}`;
+	document.getElementById('incorrect-count').textContent = `Sbagliate: ${incorrectCount}`;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('Home').addEventListener('click', function() {
-        window.location.href = '../index.html';
-    });
+	document.getElementById('Home').addEventListener('click', function() {
+		window.location.href = '../index.html';
+	});
 });
-
