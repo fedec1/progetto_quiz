@@ -37,11 +37,15 @@ let checkCampiRequiredAvviaQuiz = () => {
 	const compiledUsername = document.querySelector('.quiz-setup input#username');
 	if (!selectedButton) {
 		// Se l'username è presente ma non è stato selezionato alcun tipo di quiz, mostra il messaggio appropriato
-		showModal("Seleziona un tipo di quiz");
+		showModal("Seleziona un tipo di quiz e inserisci l'username");
 		compiledFields = false;
 	}
 	if (selectedButton && !compiledUsername.value) {
 		showModal("Inserire l'username");
+		compiledFields = false;
+	}
+	if(compiledUsername.value && !compiledFields){
+		showModal("Seleziona un tipo di quiz");
 		compiledFields = false;
 	}
 	return compiledFields;
