@@ -22,6 +22,7 @@ class Prj21QuizCountriesApplicationTests {
 		System.out.println(service.getNazioneByAlpha2Code("IT").getCapital());
 		System.out.println(service.getNazioneByAlpha2Code("IT").getBorders());
 		System.out.println(service.getNazioneByAlpha3Code("AUS").getBandiera());
+		//System.out.println(service.getNazioneByAlpha3Code("IT").deserializeTranslations(service.getNazioneByAlpha3Code("IT").getTranslations()));
 		
 	}
 	

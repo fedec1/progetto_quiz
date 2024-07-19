@@ -1,5 +1,6 @@
  package com.fedec.entities;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.PostLoad;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "nazioni")
@@ -44,12 +50,31 @@ public class Nazione {
 	@Column(name = "region", nullable = false, length = 89)
 	private String region;
 	
-	@Column(name = "difficulty", nullable = false, length = 2)
+	@Column(name = "difficulty")
 	private int difficulty;
 	
-	@Column(name = "translations", nullable = false, length = 89)
-	private String translations;
+	/*@Column(name = "translations", nullable = false)
+	private String translations;*/
+	@Lob
+    @Column(columnDefinition = "TEXT")
+    private String translations;
+	
+	@Transient
+    private Map<String, String> translationsMap;
+	
+	@PostLoad
+    private void postLoad() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        this.translationsMap = objectMapper.readValue(this.translations, new TypeReference<Map<String, String>>() {});
+    }
 
+    @PrePersist
+    @PreUpdate
+    private void prePersist() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        this.translations = objectMapper.writeValueAsString(this.translationsMap);
+    }
+	
 	public int getId() {
 		return id;
 	}
@@ -123,7 +148,7 @@ public class Nazione {
         List<String> borders = new ArrayList<>();
 
         // Rimuovi le parentesi quadre iniziali e finali
-        bordersString = bordersString.substring(1, bordersString.length() - 1);
+        //bordersString = bordersString.substring(1, bordersString.length() - 1);
 
         // Split sulla virgola e rimuovi gli spazi
         String[] borderArray = bordersString.split(",");
@@ -145,6 +170,14 @@ public class Nazione {
 	public Map<String, String> deserializeTranslations(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(json, new TypeReference<Map<String, String>>() {});
+    }
+	
+	public Map<String, String> getTranslationsMap() {
+        return translationsMap;
+    }
+
+    public void setTranslationsMap(Map<String, String> translationsMap) {
+        this.translationsMap = translationsMap;
     }
 
 	
